@@ -1,5 +1,4 @@
 "use strict";
-// const APIKEY = 'QQ4L-5VSE-9T3T-DWE9'
 
 /**
 TODO Fix the input for Selectors, need station abbreviations
@@ -19,16 +18,15 @@ TODO Inject Selectors into sections with different ID's
     $('button').click(function() {
         if ($(departure).val() !== "") {
             let userInput = $(departure).val();
-            // let userInput = 'mont'
-            sendAjaxRequest(userInput);
+            sendRequest(userInput);
         }
     })
 
-    function sendAjaxRequest(search) {
+    function sendRequest(search) {
     // Request Departure Object for AJAX
-    const APIKEY = 'QQ4L-5VSE-9T3T-DWE9'
+        const getin = 'MW9S-E7SL-26DU-VV8V'
         let departureObj = {
-            url: `http://api.bart.gov/api/etd.aspx?cmd=etd&orig=${search}&key=${APIKEY}`,
+            url: `http://api.bart.gov/api/etd.aspx?cmd=etd&orig=${search}&key=${getin}`,
             method: "GET",
             success: departureSuccess
         };
