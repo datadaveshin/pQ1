@@ -1,15 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="/css/master.css" media="screen" title="no title">
+    <link rel="stylesheet" href="css/master.css" media="screen" title="no title">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <title>BartBack</title>
 </head>
+
 <body>
+    <!-- <section> -->
+    <!-- <button class="button" id="start-location">Start</button>
+    <button class="button" id="end-location">End</button>
+    <button class="button" id="button-medium">Deadkt</button>
+    <button class="button" id="button-hard">Hard</button> -->
+    <!-- </section> -->
+
+    <!-- The second option will be initially selected. -->
+    <h2>Starting Station</h2>
+    <select name="departure" id="departure">
+        <option value="12th St. Oakland City Center">12th St. Oakland City Center</option>
+        <option value="16th St. Mission (SF)">16th St. Mission (SF)</option>
+        <option value="19th St. Oakland">19th St. Oakland</option>
+        <option value="24th St. Mission (SF)">24th St. Mission (SF)</option>
+        <option value="Ashby (Berkeley)">Ashby (Berkeley)</option>
+        <option value="Balboa Park (SF)">Balboa Park (SF)</option>
+        <option value="Bay Fair (San Leandro)">Bay Fair (San Leandro)</option>
+        <option value="Castro Valley">Castro Valley</option>
+        <option value="Civic Center / UN Plaza">Civic Center / UN Plaza</option>
+        <option value="Coliseum">Coliseum</option>
+        <option value="Colma">Colma</option>
+        <option value="Concord">Concord</option>
+        <option value="Daly City">Daly City</option>
+        <option value="Downtown Berkeley">Downtown Berkeley</option>
+        <option value="Dublin / Pleasanton">Dublin / Pleasanton</option>
+        <option value="El Cerrito del Norte">El Cerrito del Norte</option>
+        <option value="El Cerrito Plaza">El Cerrito Plaza</option>
+        <option value="Embarcadero (SF)">Embarcadero (SF)</option>
+        <option value="Fremont">Fremont</option>
+        <option value="Fruitvale (Oakland)">Fruitvale (Oakland)</option>
+        <option value="Glen Park (SF)">Glen Park (SF)</option>
+        <option value="Hayward">Hayward</option>
+        <option value="Lafayette">Lafayette</option>
+        <option value="Lake Merritt (Oakland)">Lake Merritt (Oakland)</option>
+        <option value="MacArthur (Oakland)">MacArthur (Oakland)</option>
+        <option value="Millbrae">Millbrae</option>
+        <option value="mont" selected>Montgomery St. (SF)</option>
+        <option value="North Berkeley">North Berkeley</option>
+        <option value="North Concord / Martinez">North Concord / Martinez</option>
+        <option value="Oakland Int'l Airport">Oakland Int'l Airport</option>
+        <option value="Orinda">Orinda</option>
+        <option value="Pittsburg / Bay Point">Pittsburg / Bay Point</option>
+        <option value="Pleasant Hill / Contra Costa Centre">Pleasant Hill / Contra Costa Centre</option>
+        <option value="Powell St. (SF)">Powell St. (SF)</option>
+        <option value="Richmond">Richmond</option>
+        <option value="Rockridge (Oakland)">Rockridge (Oakland)</option>
+        <option value="San Bruno">San Bruno</option>
+        <option value="San Francisco Int'l Airport">San Francisco Int'l Airport</option>
+        <option value="San Leandro">San Leandro</option>
+        <option value="South Hayward">South Hayward</option>
+        <option value="South San Francisco">South San Francisco</option>
+        <option value="Union City">Union City</option>
+        <option value="Walnut Creek">Walnut Creek</option>
+        <option value="West Dublin / Pleasanton">West Dublin / Pleasanton</option>
+        <option value="West Oakland">West Oakland</option>
+    </select>
+    <h2>End Station</h2>
+    <select name="arrival" id="arrival">
+        <option value="12th St. Oakland City Center">12th St. Oakland City Center</option>
+        <option value="16th St. Mission (SF)">16th St. Mission (SF)</option>
+        <option value="19th St. Oakland">19th St. Oakland</option>
+        <option value="24th St. Mission (SF)">24th St. Mission (SF)</option>
+        <option value="Ashby (Berkeley)">Ashby (Berkeley)</option>
+        <option value="Balboa Park (SF)">Balboa Park (SF)</option>
+        <option value="Bay Fair (San Leandro)">Bay Fair (San Leandro)</option>
+        <option value="Castro Valley">Castro Valley</option>
+        <option value="Civic Center / UN Plaza">Civic Center / UN Plaza</option>
+        <option value="Coliseum">Coliseum</option>
+        <option value="Colma">Colma</option>
+        <option value="Concord">Concord</option>
+        <option value="Daly City">Daly City</option>
+        <option value="Downtown Berkeley">Downtown Berkeley</option>
+        <option value="Dublin / Pleasanton">Dublin / Pleasanton</option>
+        <option value="El Cerrito del Norte">El Cerrito del Norte</option>
+        <option value="El Cerrito Plaza" selected="">El Cerrito Plaza</option>
+        <option value="Embarcadero (SF)">Embarcadero (SF)</option>
+        <option value="Fremont">Fremont</option>
+        <option value="Fruitvale (Oakland)">Fruitvale (Oakland)</option>
+        <option value="Glen Park (SF)">Glen Park (SF)</option>
+        <option value="Hayward">Hayward</option>
+        <option value="Lafayette">Lafayette</option>
+        <option value="Lake Merritt (Oakland)">Lake Merritt (Oakland)</option>
+        <option value="MacArthur (Oakland)">MacArthur (Oakland)</option>
+        <option value="Millbrae">Millbrae</option>
+        <option value="Montgomery St. (SF)">Montgomery St. (SF)</option>
+        <option value="North Berkeley">North Berkeley</option>
+        <option value="North Concord / Martinez">North Concord / Martinez</option>
+        <option value="Oakland Int'l Airport">Oakland Int'l Airport</option>
+        <option value="Orinda">Orinda</option>
+        <option value="Pittsburg / Bay Point">Pittsburg / Bay Point</option>
+        <option value="Pleasant Hill / Contra Costa Centre">Pleasant Hill / Contra Costa Centre</option>
+        <option value="Powell St. (SF)">Powell St. (SF)</option>
+        <option value="Richmond">Richmond</option>
+        <option value="Rockridge (Oakland)">Rockridge (Oakland)</option>
+        <option value="San Bruno">San Bruno</option>
+        <option value="San Francisco Int'l Airport">San Francisco Int'l Airport</option>
+        <option value="San Leandro">San Leandro</option>
+        <option value="South Hayward">South Hayward</option>
+        <option value="South San Francisco">South San Francisco</option>
+        <option value="Union City">Union City</option>
+        <option value="Walnut Creek">Walnut Creek</option>
+        <option value="West Dublin / Pleasanton">West Dublin / Pleasanton</option>
+        <option value="West Oakland">West Oakland</option>
+    </select>
+    <h2>Risk Level</h2>
+    <input type="radio" name="risk-level" value="1 minute">Crazy (1 min)
+    <input type="radio" name="risk-level" value="2 minutes" checked>Medium (2 min)
+    <input type="radio" name="risk-level" value="3 minutes">Boring (3+ min)
+
+    <h1>Go!</h1>
+        <button id="button">Launch</button>
+    <h3 id="result"></h3>
+    <script type="text/javascript" src="script.js">
+
+    </script>
 </body>
+
 </html>
 <!-- Copyright David Shin 2016
 All Rights Reserved -->
