@@ -1,0 +1,9 @@
+#!/bin/sh
+# Copyright David Shin 2016
+# 
+# Takes input file with a single column (multiple rows) of data
+# Outputs as a single comma-delimited line to stdout
+#
+# Usage ./fullrows2csv <filename> 
+
+paste -d, -s $1  # no space after comma
