@@ -1,8 +1,7 @@
 "use strict";
 
-$(document).ready(function() {
-    $('select').material_select();
-});
+
+
 
 /**
 TODO Fix the input for Selectors, need station abbreviations
@@ -45,6 +44,7 @@ function genSelector(selectorName) {
     $(selectorDiv).addClass("container")
     $(selectorSelect).attr("name", selectorName)
     $(selectorSelect).attr("id", selectorName)
+    $(selectorSelect).class()"browser-default")
     $(selectorDefaultOption).val("default")
     $(selectorDefaultOption).text("Choose Train")
 
