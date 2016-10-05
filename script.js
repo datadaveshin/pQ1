@@ -185,7 +185,7 @@ function genSelector(selectorName) {
             if (Array.isArray(est)) {
                 var mins = item.estimate[0].minutes['#text']
                 console.log(item.estimate[0].minutes['#text'])
-            } else if (typeof est === 'Object') {
+            } else if (typeof est === 'object') {
                 console.log("typeof est:", est)
                 var mins = item.estimate.minutes['#text']
                 console.log(item.estimate.minutes['#text'])
