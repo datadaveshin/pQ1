@@ -1,5 +1,9 @@
 "use strict";
 
+$(document).ready(function() {
+    $('select').material_select();
+});
+
 /**
 TODO Fix the input for Selectors, need station abbreviations
 TODO Inject Selectors into sections with different ID's
@@ -37,7 +41,8 @@ function genSelector(selectorName) {
 
     // Set attributes, names, values
     $(selectorDiv).attr("id", selectorName + "selector")
-    $(selectorHeading).text(selectorName + " Station")
+    $(selectorDiv).attr("id", selectorName + "selector")
+    $(selectorDiv).addClass("container")
     $(selectorSelect).attr("name", selectorName)
     $(selectorSelect).attr("id", selectorName)
     $(selectorDefaultOption).val("default")
@@ -113,13 +118,15 @@ function genSelector(selectorName) {
                 console.log(item.estimate.minutes['#text'])
             }
             var body2 = $('body')
+            var div2 = $('<div class="container">')
             var h3dest = $('<h3>')
-            var h3mins = $('<h3>')
-            console.log("$(h3mins)", $(h3mins))
+            var h4mins = $('<h4>')
+            console.log("$(h4mins)", $(h4mins))
             $(h3dest).text(dest + " train leaves in")
-            $(h3mins).text(mins + " minutes")
-            $(body2).append(h3dest)
-            $(body2).append(h3mins)
+            $(h4mins).text(mins + " minutes")
+            $(body2).append(div2)
+            $(div2).append(h3dest)
+            $(div2).append(h4mins)
         })
     }
 })();

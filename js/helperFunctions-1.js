@@ -17,3 +17,8 @@ function $$each(collection, callback) {
         }
     }
 }
+
+/*
+Copyright David Shin 2016
+All Rights Reserved
+*/
