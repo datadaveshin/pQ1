@@ -22,6 +22,7 @@
     <!-- jQuery first - note, materialize webpage notes the 2.1.1 version! -->
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script> -->
+    <script type="text/javascript" src="js/materialize.min.js"></script>
 
     <title>BartBack</title>
 </head>
@@ -70,10 +71,13 @@
     <!--Import jQuery before materialize.js-->
     <!-- <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script> -->
     <!-- <script type="text/javascript" src="js/jquery-3.1.1.min"></script> -->
-    <script type="text/javascript" src="js/materialize.min.js"></script>
+    <!-- <script type="text/javascript" src="js/materialize.min.js"></script> -->
     <script type="text/javascript" src="js/helperFunctions-1.js"></script>
     <script type="text/javascript" src="js/helperFunctions-2.js"></script>
     <script type="text/javascript" src="js/script.js"></script>
+    <script> $(document).ready(function() {
+        $('select').material_select();
+    });</script>
 </body>
 
 </html>
