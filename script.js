@@ -9,23 +9,66 @@ TODO Inject Selectors into sections with different ID's
 
 // Helper Functions
 function $$each(collection, callback) {
-        if (typeof collection === 'string') {
-            collection = collection.split("")
-            for (let i = 0; i < collection.length; i++) {
-                callback(collection[i], i, collection.join(""), collection['0'], collection[collection.length-1], 0, collection.length - 1, collection.length);
-            }
-        }
-        else if (Array.isArray(collection)) {
-            for (let i = 0; i < collection.length; i++) {
-                callback(collection[i], i, collection, collection['0'], collection[collection.length-1], 0, collection.length - 1, collection.length);
-            }
-        }
-        else if (typeof collection === 'object') {
-            for (let key in collection) {
-                callback(collection[key], key, collection, collection[Object.keys(collection)[0]], collection[(Object.keys(collection)[Object.keys(collection).length - 1])], Object.keys(collection)[0], Object.keys(collection)[Object.keys(collection).length - 1], Object.keys(collection).length);
-            }
+    if (typeof collection === 'string') {
+        collection = collection.split("")
+        for (let i = 0; i < collection.length; i++) {
+            callback(collection[i], i, collection.join(""), collection['0'], collection[collection.length-1], 0, collection.length - 1, collection.length);
         }
     }
+    else if (Array.isArray(collection)) {
+        for (let i = 0; i < collection.length; i++) {
+            callback(collection[i], i, collection, collection['0'], collection[collection.length-1], 0, collection.length - 1, collection.length);
+        }
+    }
+    else if (typeof collection === 'object') {
+        for (let key in collection) {
+            callback(collection[key], key, collection, collection[Object.keys(collection)[0]], collection[(Object.keys(collection)[Object.keys(collection).length - 1])], Object.keys(collection)[0], Object.keys(collection)[Object.keys(collection).length - 1], Object.keys(collection).length);
+        }
+    }
+}
+
+function xmlToJson(xml) {
+    try {
+        var obj = {};
+        if (xml.nodeType == 1) {
+            if (xml.attributes.length > 0) {
+                for (var j = 0; j < xml.attributes.length; j++) {
+                    var attribute = xml.attributes.item(j);
+
+                    obj[attribute.nodeName] = attribute.nodeValue;
+                }
+            }
+        } else if (xml.nodeType == 3) {
+            obj = xml.nodeValue;
+        }
+
+        if (xml.hasChildNodes()) {
+            for (var i = 0; i < xml.childNodes.length; i++) {
+                var item = xml.childNodes.item(i);
+                var nodeName = item.nodeName;
+
+                if (typeof (obj[nodeName]) == "undefined") {
+                    obj[nodeName] = xmlToJson(item);
+                } else {
+                    if (typeof (obj[nodeName].push) == "undefined") {
+                        var old = obj[nodeName];
+
+                        obj[nodeName] = [];
+                        obj[nodeName].push(old);
+                    }
+
+                    obj[nodeName].push(xmlToJson(item));
+                }
+            }
+        }
+
+        // console.log(JSON.stringify(obj));
+        return obj;
+    } catch (e) {
+        alert(e.message);
+    }
+}
+
 
 // Stations
 var stationAbbrev = ["12th","16th","19th","24th","ashb","balb","bayf","cast","civc","cols","colm","conc","daly","dbrk","dubl","deln","plza","embr","frmt","ftvl","glen","hayw","lafy","lake","mcar","mlbr","mont","nbrk","ncon","oakl","orin","pitt","phil","powl","rich","rock","sbrn","sfia","sanl","shay","ssan","ucty","warm","wcrk","wdub","woak"]
@@ -93,7 +136,6 @@ function genSelector(selectorName) {
     console.log("$(departure):", $(departure))
 
     // Set up
-
     $('button').click(function() {
         if ($(departure).val() !== "") {
             let userInput = $(departure).val();
@@ -117,7 +159,59 @@ function genSelector(selectorName) {
         console.log("data:", data)
         let result = $("#result")
         $(result).text(data)
+
+        var parser = new DOMParser();
+        // var doc = parser.parseFromString(stringContainingXMLSource, "application/xml");
+        // var doc = parser.parseFromString(data, "application/xml");
+
+        // var xmlDoc = data.responseXML
+
+        var xmlDoc = xmlToJson(data)
+
+        console.log("xmlDoc", xmlDoc)
+        $$each(xmlDoc.root.station.etd, function(item) {
+            // console.log(item.station.etd)
+            // console.log("COUNTER")
+            // console.log("item", item)
+
+            console.log(item)
+
+            console.log(item.destination['#text'])
+            var dest = item.destination['#text']
+            console.log("DEST!!!!!!", dest)
+
+            var est = item.estimate;
+            console.log("est:", est)
+            if (Array.isArray(est)) {
+                var mins = item.estimate[0].minutes['#text']
+                console.log(item.estimate[0].minutes['#text'])
+            } else if (typeof est === 'Object') {
+                console.log("typeof est:", est)
+                var mins = item.estimate.minutes['#text']
+                console.log(item.estimate.minutes['#text'])
+            }
+
+            ///var mins = item.estimate[0].minutes['#text']
+            // var mins = item.estimate
+
+            var body2 = $('body')
+            var h3dest = $('<h3>')
+            var h3mins = $('<h3>')
+            console.log("$(h3mins)", $(h3mins))
+            $(h3dest).text(dest)
+            $(h3mins).text(mins)
+            $(body2).append(h3dest)
+            $(body2).append(h3mins)
+            // var etd = item.station.etd
+            // $$each(etd, function(item2) {
+            //     console.log(item2.abbreviation)
+            // })
+        })
+
+        // console.log("doc:", doc)
+        // console.log("$(doc):", $(doc))
     }
+
 })();
 
 // Copyright David Shin 2016
