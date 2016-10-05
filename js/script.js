@@ -1,6 +1,8 @@
 "use strict";
 
-
+$(document).ready(function() {
+    $('select').material_select();
+});
 
 
 /**
@@ -62,8 +64,10 @@ function genSelector(selectorName) {
         $(selectorOption).val(statObj.abbrev)
         $(selectorOption).text(statObj.fullname)
         $(selectorSelect).append(selectorOption)
+        $('select').material_select();
     })
     console.log("selectorSelect: ", selectorSelect)
+    $('select').material_select();
 }
 
 // The Loop
