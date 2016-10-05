@@ -161,19 +161,10 @@ function genSelector(selectorName) {
         $(result).text(data)
 
         var parser = new DOMParser();
-        // var doc = parser.parseFromString(stringContainingXMLSource, "application/xml");
-        // var doc = parser.parseFromString(data, "application/xml");
-
-        // var xmlDoc = data.responseXML
-
         var xmlDoc = xmlToJson(data)
 
         console.log("xmlDoc", xmlDoc)
         $$each(xmlDoc.root.station.etd, function(item) {
-            // console.log(item.station.etd)
-            // console.log("COUNTER")
-            // console.log("item", item)
-
             console.log(item)
 
             console.log(item.destination['#text'])
@@ -190,28 +181,16 @@ function genSelector(selectorName) {
                 var mins = item.estimate.minutes['#text']
                 console.log(item.estimate.minutes['#text'])
             }
-
-            ///var mins = item.estimate[0].minutes['#text']
-            // var mins = item.estimate
-
             var body2 = $('body')
             var h3dest = $('<h3>')
             var h3mins = $('<h3>')
             console.log("$(h3mins)", $(h3mins))
-            $(h3dest).text(dest)
-            $(h3mins).text(mins)
+            $(h3dest).text(dest + " train leaves in")
+            $(h3mins).text(mins + " minutes")
             $(body2).append(h3dest)
             $(body2).append(h3mins)
-            // var etd = item.station.etd
-            // $$each(etd, function(item2) {
-            //     console.log(item2.abbreviation)
-            // })
         })
-
-        // console.log("doc:", doc)
-        // console.log("$(doc):", $(doc))
     }
-
 })();
 
 // Copyright David Shin 2016
