@@ -44,7 +44,7 @@ function genSelector(selectorName) {
     $(selectorDiv).addClass("container")
     $(selectorSelect).attr("name", selectorName)
     $(selectorSelect).attr("id", selectorName)
-    $(selectorSelect).class()"browser-default")
+    $(selectorSelect).addClass("browser-default")
     $(selectorDefaultOption).val("default")
     $(selectorDefaultOption).text("Choose Train")
 
