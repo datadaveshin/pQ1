@@ -7,69 +7,6 @@ TODO Inject Selectors into sections with different ID's
 2) Use jQuery and $$each go load
 */
 
-// Helper Functions
-function $$each(collection, callback) {
-    if (typeof collection === 'string') {
-        collection = collection.split("")
-        for (let i = 0; i < collection.length; i++) {
-            callback(collection[i], i, collection.join(""), collection['0'], collection[collection.length-1], 0, collection.length - 1, collection.length);
-        }
-    }
-    else if (Array.isArray(collection)) {
-        for (let i = 0; i < collection.length; i++) {
-            callback(collection[i], i, collection, collection['0'], collection[collection.length-1], 0, collection.length - 1, collection.length);
-        }
-    }
-    else if (typeof collection === 'object') {
-        for (let key in collection) {
-            callback(collection[key], key, collection, collection[Object.keys(collection)[0]], collection[(Object.keys(collection)[Object.keys(collection).length - 1])], Object.keys(collection)[0], Object.keys(collection)[Object.keys(collection).length - 1], Object.keys(collection).length);
-        }
-    }
-}
-
-function xmlToJson(xml) {
-    try {
-        var obj = {};
-        if (xml.nodeType == 1) {
-            if (xml.attributes.length > 0) {
-                for (var j = 0; j < xml.attributes.length; j++) {
-                    var attribute = xml.attributes.item(j);
-
-                    obj[attribute.nodeName] = attribute.nodeValue;
-                }
-            }
-        } else if (xml.nodeType == 3) {
-            obj = xml.nodeValue;
-        }
-
-        if (xml.hasChildNodes()) {
-            for (var i = 0; i < xml.childNodes.length; i++) {
-                var item = xml.childNodes.item(i);
-                var nodeName = item.nodeName;
-
-                if (typeof (obj[nodeName]) == "undefined") {
-                    obj[nodeName] = xmlToJson(item);
-                } else {
-                    if (typeof (obj[nodeName].push) == "undefined") {
-                        var old = obj[nodeName];
-
-                        obj[nodeName] = [];
-                        obj[nodeName].push(old);
-                    }
-
-                    obj[nodeName].push(xmlToJson(item));
-                }
-            }
-        }
-
-        // console.log(JSON.stringify(obj));
-        return obj;
-    } catch (e) {
-        alert(e.message);
-    }
-}
-
-
 // Stations
 var stationAbbrev = ["12th","16th","19th","24th","ashb","balb","bayf","cast","civc","cols","colm","conc","daly","dbrk","dubl","deln","plza","embr","frmt","ftvl","glen","hayw","lafy","lake","mcar","mlbr","mont","nbrk","ncon","oakl","orin","pitt","phil","powl","rich","rock","sbrn","sfia","sanl","shay","ssan","ucty","warm","wcrk","wdub","woak"]
 
@@ -88,12 +25,7 @@ var stationObjArray = []; $$each(stationAbbrev, function(_dummy, idx) {
 
 console.log("stationObjArray:", stationObjArray)
 
-//stationAbbrev.forEach(function(item){console.log(item)})
-
 // Setup Selectors
-
-
-// $(element).attr("id","theid");
 genSelector("Departure")
 genSelector("Arrival")
 function genSelector(selectorName) {
@@ -157,10 +89,9 @@ function genSelector(selectorName) {
 
     function departureSuccess(data) {
         console.log("data:", data)
-        let result = $("#result")
-        $(result).text(data)
+        // let result = $("#result")
+        // $(result).text(data)
 
-        var parser = new DOMParser();
         var xmlDoc = xmlToJson(data)
 
         console.log("xmlDoc", xmlDoc)
