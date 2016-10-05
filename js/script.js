@@ -44,7 +44,7 @@ function genSelector(selectorName) {
     $(selectorDiv).addClass("container")
     $(selectorSelect).attr("name", selectorName)
     $(selectorSelect).attr("id", selectorName)
-    $(selectorSelect).addClass("browser-default")
+    // $(selectorSelect).addClass("browser-default")
     $(selectorDefaultOption).val("default")
     $(selectorDefaultOption).text("Choose Train")
 
@@ -53,6 +53,7 @@ function genSelector(selectorName) {
     $(selectorDiv).append(selectorHeading)
     $(selectorDiv).append(selectorSelect)
     $(selectorSelect).append(selectorDefaultOption)
+    $(selectorSelect).material_select()
     console.log("body", body)
     console.log("$(body)", $(body))
 
