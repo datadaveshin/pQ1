@@ -1,8 +1,8 @@
 "use strict";
 
-$(document).ready(function() {
-    $('select').material_select();
-});
+// $(document).ready(function() {
+//     $('select').material_select();
+// });
 
 
 /**
@@ -31,8 +31,8 @@ var stationObjArray = []; $$each(stationAbbrev, function(_dummy, idx) {
 console.log("stationObjArray:", stationObjArray)
 
 // Setup Selectors
-// genSelector("Departure")
-// genSelector("Arrival")
+genSelector("Departure")
+genSelector("Arrival")
 function genSelector(selectorName) {
     let body = $('body')
     let selectorDiv = $('<div>')
@@ -46,7 +46,7 @@ function genSelector(selectorName) {
     $(selectorDiv).addClass("container")
     $(selectorSelect).attr("name", selectorName)
     $(selectorSelect).attr("id", selectorName)
-    // $(selectorSelect).addClass("browser-default")
+    $(selectorSelect).addClass("browser-default")
     $(selectorDefaultOption).val("default")
     $(selectorDefaultOption).text("Choose Train")
 
@@ -55,7 +55,7 @@ function genSelector(selectorName) {
     $(selectorDiv).append(selectorHeading)
     $(selectorDiv).append(selectorSelect)
     $(selectorSelect).append(selectorDefaultOption)
-    $(selectorSelect).material_select()
+    // $(selectorSelect).material_select()
     console.log("body", body)
     console.log("$(body)", $(body))
 
@@ -64,10 +64,10 @@ function genSelector(selectorName) {
         $(selectorOption).val(statObj.abbrev)
         $(selectorOption).text(statObj.fullname)
         $(selectorSelect).append(selectorOption)
-        $('select').material_select();
+        // $('select').material_select();
     })
     console.log("selectorSelect: ", selectorSelect)
-    $('select').material_select();
+    $('select').material_select(); // Needed to show selectors using materialize
 }
 
 // The Loop
@@ -81,8 +81,8 @@ function genSelector(selectorName) {
     $('button').click(function() {
         if ($(departure).val() !== "") {
             let userInput = $(departure).val();
-            // sendRequest(userInput);
-            sendRequest('mont');
+            sendRequest(userInput);
+            // sendRequest('mont');
         }
     })
 
