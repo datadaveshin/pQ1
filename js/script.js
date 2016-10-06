@@ -1,8 +1,8 @@
 "use strict";
 
-// $(document).ready(function() {
-//     $('select').material_select();
-// });
+$(document).ready(function() {
+    $('select').material_select();
+});
 
 
 /**
@@ -83,7 +83,7 @@ function genSelector(selectorName) {
     $(selectorDiv).addClass("container")
     $(selectorSelect).attr("name", selectorName)
     $(selectorSelect).attr("id", selectorName)
-    $(selectorSelect).addClass("browser-default")
+    // $(selectorSelect).addClass("browser-default")
     $(selectorDefaultOption).val("default")
     $(selectorDefaultOption).text("Choose Train")
 
@@ -141,42 +141,56 @@ function genSelector(selectorName) {
         // let result = $("#result")
         // $(result).text(data)
 
-
         // $( "div" ).remove( "#Departureselector" );
         $( "div" ).remove( "#results" );
 
-
         var xmlDoc = xmlToJson(data)
-
         console.log("xmlDoc", xmlDoc)
-        $$each(xmlDoc.root.station.etd, function(item) {
-            console.log(item)
 
-            console.log(item.destination['#text'])
-            var dest = item.destination['#text']
-            console.log("DEST!!!!!!", dest)
+        if (Array.isArray(xmlDoc.root.station.etd)) {
+            $$each(xmlDoc.root.station.etd, function(departureObj) {
+                console.log("departureObj", departureObj)
+                console.log(departureObj.destination['#text'])
+                var dest = departureObj.destination['#text']
+                console.log("DEST!!!!!!", dest)
 
-            var est = item.estimate;
-            console.log("est:", est)
-            if (Array.isArray(est)) {
-                var mins = item.estimate[0].minutes['#text']
-                console.log(item.estimate[0].minutes['#text'])
-            } else if (typeof est === 'object') {
-                console.log("typeof est:", est)
-                var mins = item.estimate.minutes['#text']
-                console.log(item.estimate.minutes['#text'])
-            }
-            var body2 = $('body')
-            var div2 = $('<div id="results" class="container">')
-            var h3dest = $('<h3>')
-            var h4mins = $('<h4>')
-            console.log("$(h4mins)", $(h4mins))
-            $(h3dest).text(dest + " train leaves in")
-            $(h4mins).text(mins + " minutes")
-            $(body2).append(div2)
-            $(div2).append(h3dest)
-            $(div2).append(h4mins)
-        })
+                var est = departureObj.estimate;
+                console.log("est:", est)
+                if (Array.isArray(est)) {
+                    var mins = departureObj.estimate[0].minutes['#text']
+                    console.log(departureObj.estimate[0].minutes['#text'])
+                    var routeColor = departureObj.estimate[0].color['#text']
+                } else if (typeof est === 'object') {
+                    console.log("typeof est:", est)
+                    var mins = departureObj.estimate.minutes['#text']
+                    console.log(departureObj.estimate.minutes['#text'])
+                    var routeColor = departureObj.estimate.color['#text']
+                }
+                var body2 = $('body')
+                var div2 = $('<div id="results" class="container">')
+                var destinationResults = $('<h5>')
+                var timeResults = $('<h6>')
+                console.log("$(timeResults)", $(timeResults))
+                $(destinationResults).text(dest + " Train")
+                $(destinationResults).css("backgroundColor", routeColor)
+                if (departureObj.abbreviation['#text'] === "DUBL" || departureObj.abbreviation['#text'] === "DALY") {
+                    $(destinationResults).css("color", "white")
+                }
+                // if (destinationResults.text()==="Richmond Train") {
+                // if (dest==="Richmond") {
+                //     $(destinationResults).css("backgroundColor", "red")
+                //     $(destinationResults).css("fontcolor", "white")
+                // }
+                // if (destinationResults.text()==="Fremont Train") {
+                //     $(destinationResults).css("backgroundColor", "orange")
+                //     $(destinationResults).css("fontcolor", "white")
+                // }
+                $(timeResults).text(mins + " minutes")
+                $(body2).append(div2)
+                $(div2).append(destinationResults)
+                $(div2).append(timeResults)
+            })
+        }
     }
 })();
 
