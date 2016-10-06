@@ -33,6 +33,43 @@ console.log("stationObjArray:", stationObjArray)
 // Setup Selectors
 genSelector("Departure")
 genSelector("Arrival")
+// function genSelector(selectorName) {
+//     let body = $('body')
+//     let selectorDiv = $('<div>')
+//     let selectorHeading = $('<h2>')
+//     var selectorSelect = $('<select>')
+//     let selectorDefaultOption = $('<option>')
+//
+//     // Set attributes, names, values
+//     $(selectorDiv).attr("id", selectorName + "selector")
+//     $(selectorDiv).attr("id", selectorName + "selector")
+//     $(selectorDiv).addClass("container")
+//     $(selectorSelect).attr("name", selectorName)
+//     $(selectorSelect).attr("id", selectorName)
+//     $(selectorSelect).addClass("browser-default")
+//     $(selectorDefaultOption).val("default")
+//     $(selectorDefaultOption).text("Choose Train")
+//
+//     // Build Dom
+//     $(body).append(selectorDiv)
+//     $(selectorDiv).append(selectorHeading)
+//     $(selectorDiv).append(selectorSelect)
+//     $(selectorSelect).append(selectorDefaultOption)
+//     // $(selectorSelect).material_select()
+//     console.log("body", body)
+//     console.log("$(body)", $(body))
+//
+//     $$each(stationObjArray, function(statObj) {
+//         let selectorOption = $('<option>')
+//         $(selectorOption).val(statObj.abbrev)
+//         $(selectorOption).text(statObj.fullname)
+//         $(selectorSelect).append(selectorOption)
+//         // $('select').material_select();
+//     })
+//     console.log("selectorSelect: ", selectorSelect)
+//     // $('select').material_select(); // Needed to show selectors using materialize
+// }
+
 function genSelector(selectorName) {
     let body = $('body')
     let selectorDiv = $('<div>')
@@ -70,6 +107,7 @@ function genSelector(selectorName) {
     // $('select').material_select(); // Needed to show selectors using materialize
 }
 
+
 // The Loop
 (function() {
     var departure = $('#Departure');
@@ -102,6 +140,8 @@ function genSelector(selectorName) {
         console.log("data:", data)
         // let result = $("#result")
         // $(result).text(data)
+        $( "div" ).remove( "#Departureselector" );
+        // $("#Departureselector").remove()
 
         var xmlDoc = xmlToJson(data)
 
