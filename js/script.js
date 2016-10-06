@@ -1,27 +1,26 @@
 "use strict";
 
-$(document).ready(function() {
-    $('select').material_select();
-});
-
-
 /**
-TODO Fix the input for Selectors, need station abbreviations
-TODO Inject Selectors into sections with different ID's
-1) Use SED/AWK to set up the input
-2) Use jQuery and $$each go load
+Bart Station Abbreviations used by api
 */
-
-// Stations
 var stationAbbrev = ["12th","16th","19th","24th","ashb","balb","bayf","cast","civc","cols","colm","conc","daly","dbrk","dubl","deln","plza","embr","frmt","ftvl","glen","hayw","lafy","lake","mcar","mlbr","mont","nbrk","ncon","oakl","orin","pitt","phil","powl","rich","rock","sbrn","sfia","sanl","shay","ssan","ucty","warm","wcrk","wdub","woak"]
 
-var stationFull = ["12th St. Oakland City Center","16th St. Mission (SF)","19th St. Oakland","24th St. Mission (SF)","Ashby (Berkeley)","Balboa Park (SF)","Bay Fair (San Leandro)","Castro Valley","Civic Center (SF)","Coliseum","Colma","Concord","Daly City","Downtown Berkeley","Dublin/Pleasanton","El Cerrito del Norte","El Cerrito Plaza","Embarcadero (SF)","Fremont","Fruitvale (Oakland)","Glen Park (SF)","Hayward","Lafayette","Lake Merritt (Oakland)","MacArthur (Oakland)","Millbrae","Montgomery St. (SF)","North Berkeley","North Concord/Martinez","Oakland Int'l Airport","Orinda","Pittsburg/Bay Point","Pleasant Hill","Powell St. (SF)","Richmond","Rockridge (Oakland)","San Bruno","San Francisco Int'l Airport","San Leandro","South Hayward","South San Francisco","Union City","Warm Springs/South Fremont","Walnut Creek","West Dublin","West Oakland"]
+/**
+Bar Station Full Names used by api
+*/
+var stationFull = ["12th St. Oakland City Center","16th St. Mission (SF)","19th St. Oakland","24th St. Mission (SF)","Ashby (Berkeley)","Balboa Park (SF)","Bay Fair (San Leandro)","Castro Valley","Civic Center (SF)","Coliseum","Colma","Concord","Daly City","Downtown Berkeley","Dublin/Pleasanton","El Cerrito del Norte","El Cerrito Plaza","Embarcadero (SF)","Fremont","Fruitvale (Oakland)","Glen Park (SF)","Hayward","Lafayette","Lake M   erritt (Oakland)","MacArthur (Oaklanßd)","Millbrae","Montgomery St.ß (SF)","North Berkeley","North Concord/Martinez","Oakland Int'l Airport","Orinda","Pittsburg/Bay Point","Pleasant Hill","Powell St. (SF)","Richmond","Rockridge (Oakland)","San Bruno","San Francisco Int'l Airport","San Leandro","South Hayward","South San Francisco","Union City","Warm Springs/South Fremont","Walnut Creek","West Dublin","West Oakland"]
 
+/**
+Define a Station Class
+*/
 function Station(abbrev, fullname) {
     this.abbrev = abbrev || "";
     this.fullname = fullname || "";
 }
 
+/**
+Array that contains a Station instance for each Bart Station
+*/
 var stationObjArray = []; $$each(stationAbbrev, function(_dummy, idx) {
    let retArr = []
    let stationObj = new Station(stationAbbrev[idx], stationFull[idx])
@@ -33,43 +32,14 @@ console.log("stationObjArray:", stationObjArray)
 // Setup Selectors
 genSelector("Departure")
 genSelector("Arrival")
-// function genSelector(selectorName) {
-//     let body = $('body')
-//     let selectorDiv = $('<div>')
-//     let selectorHeading = $('<h2>')
-//     var selectorSelect = $('<select>')
-//     let selectorDefaultOption = $('<option>')
-//
-//     // Set attributes, names, values
-//     $(selectorDiv).attr("id", selectorName + "selector")
-//     $(selectorDiv).attr("id", selectorName + "selector")
-//     $(selectorDiv).addClass("container")
-//     $(selectorSelect).attr("name", selectorName)
-//     $(selectorSelect).attr("id", selectorName)
-//     $(selectorSelect).addClass("browser-default")
-//     $(selectorDefaultOption).val("default")
-//     $(selectorDefaultOption).text("Choose Train")
-//
-//     // Build Dom
-//     $(body).append(selectorDiv)
-//     $(selectorDiv).append(selectorHeading)
-//     $(selectorDiv).append(selectorSelect)
-//     $(selectorSelect).append(selectorDefaultOption)
-//     // $(selectorSelect).material_select()
-//     console.log("body", body)
-//     console.log("$(body)", $(body))
-//
-//     $$each(stationObjArray, function(statObj) {
-//         let selectorOption = $('<option>')
-//         $(selectorOption).val(statObj.abbrev)
-//         $(selectorOption).text(statObj.fullname)
-//         $(selectorSelect).append(selectorOption)
-//         // $('select').material_select();
-//     })
-//     console.log("selectorSelect: ", selectorSelect)
-//     // $('select').material_select(); // Needed to show selectors using materialize
-// }
 
+/**
+Generates and injects <select> tags to body
+i: Name for the <select> `id` and `name` for reference
+o: Selector attached to element with each station as option
+TODO: inject these to a specific <div> in html
+TODO: use array as parameter to generalize
+*/
 function genSelector(selectorName) {
     let body = $('body')
     let selectorDiv = $('<div>')
@@ -92,7 +62,7 @@ function genSelector(selectorName) {
     $(selectorDiv).append(selectorHeading)
     $(selectorDiv).append(selectorSelect)
     $(selectorSelect).append(selectorDefaultOption)
-    // $(selectorSelect).material_select()
+
     console.log("body", body)
     console.log("$(body)", $(body))
 
@@ -101,10 +71,8 @@ function genSelector(selectorName) {
         $(selectorOption).val(statObj.abbrev)
         $(selectorOption).text(statObj.fullname)
         $(selectorSelect).append(selectorOption)
-        // $('select').material_select();
     })
     console.log("selectorSelect: ", selectorSelect)
-    // $('select').material_select(); // Needed to show selectors using materialize
 }
 
 
@@ -173,18 +141,11 @@ function genSelector(selectorName) {
                 console.log("$(timeResults)", $(timeResults))
                 $(destinationResults).text(dest + " Train")
                 $(destinationResults).css("backgroundColor", routeColor)
-                if (departureObj.abbreviation['#text'] === "DUBL" || departureObj.abbreviation['#text'] === "DALY") {
+
+                if (["RED", "GREEN", "BLUE"].indexOf(routeColor) !== -1) {
                     $(destinationResults).css("color", "white")
                 }
-                // if (destinationResults.text()==="Richmond Train") {
-                // if (dest==="Richmond") {
-                //     $(destinationResults).css("backgroundColor", "red")
-                //     $(destinationResults).css("fontcolor", "white")
-                // }
-                // if (destinationResults.text()==="Fremont Train") {
-                //     $(destinationResults).css("backgroundColor", "orange")
-                //     $(destinationResults).css("fontcolor", "white")
-                // }
+
                 $(timeResults).text(mins + " minutes")
                 $(body2).append(div2)
                 $(div2).append(destinationResults)

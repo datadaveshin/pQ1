@@ -51,11 +51,12 @@ body {
 
 h1, h2, h3 {
     margin-top: 1em;
+	color: #333;
     /*padding-top: 1em;*/
 }
 
-h1, h2, h3, strong {
-    color: #333;
+strong {
+	color: #333;
 }
 
 h1 {

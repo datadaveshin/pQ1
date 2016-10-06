@@ -94,6 +94,15 @@
     <!-- <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script> -->
     <!-- <script type="text/javascript" src="js/jquery-3.1.1.min"></script> -->
     <script type="text/javascript" src="js/materialize.min.js"></script>
+    <script>
+    /**
+    Required by Materialize to render <select> tags
+    Toggle on/off if using Materialize
+    */
+    $(document).ready(function() {
+        $('select').material_select();
+    });
+    </script>
     <script type="text/javascript" src="js/helperFunctions-1.js"></script>
     <script type="text/javascript" src="js/helperFunctions-2.js"></script>
     <script type="text/javascript" src="js/script.js"></script>
