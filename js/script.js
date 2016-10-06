@@ -22,7 +22,8 @@ function Station(abbrev, fullname) {
 /**
 Array that contains a Station instance for each Bart Station
 */
-var stationObjArray = []; $$each(stationAbbrev, function(_dummy, idx) {
+var stationObjArray = [];
+$$each(stationAbbrev, function(_dummy, idx) {
    let retArr = []
    let stationObj = new Station(stationAbbrev[idx], stationFull[idx])
    stationObjArray.push(stationObj)
@@ -31,8 +32,8 @@ var stationObjArray = []; $$each(stationAbbrev, function(_dummy, idx) {
 console.log("stationObjArray:", stationObjArray)
 
 // Setup Selectors
-genSelector("Departure")
-genSelector("Arrival")
+genSelector("Departure", "#point2")
+genSelector("Arrival", "#point2")
 
 /**
 Generates and injects <select> tags to body
@@ -41,8 +42,10 @@ o: Selector attached to element with each station as option
 TODO: inject these to a specific <div> in html
 TODO: use array as parameter to generalize
 */
-function genSelector(selectorName) {
-    let body = $('body')
+function genSelector(selectorName, attachmentPoint) {
+    // let body = $('body')
+    // let body = $('body')
+    let point1 = $(attachmentPoint)
     let selectorDiv = $('<div>')
     let selectorHeading = $('<h2>')
     var selectorSelect = $('<select>')
@@ -59,13 +62,10 @@ function genSelector(selectorName) {
     $(selectorDefaultOption).text("Choose Train")
 
     // Build Dom
-    $(body).append(selectorDiv)
+    $(point1).append(selectorDiv)
     $(selectorDiv).append(selectorHeading)
     $(selectorDiv).append(selectorSelect)
     $(selectorSelect).append(selectorDefaultOption)
-
-    console.log("body", body)
-    console.log("$(body)", $(body))
 
     $$each(stationObjArray, function(statObj) {
         let selectorOption = $('<option>')
@@ -79,14 +79,34 @@ function genSelector(selectorName) {
 /**
 Setup Buttons
 */
+function addButton(aButtonID, buttonText, attachmentPoint) {
+    let newButton = $('<button>')
+    $(newButton).addClass("waves-effect btn col s6")
+    $(newButton).attr("id", aButtonID)
+    $(newButton).text(buttonText)
 
+    console.log("MY NEW BUTTON", newButton);
+    let sectionPart = $(attachmentPoint)
+    $(sectionPart).append(newButton)
+    console.log("sectionPart", sectionPart);
+    console.log("$(sectionPart)", $(sectionPart));
+}
+
+addButton("button", "Real Time", "#point1");
+addButton("button2", "Bart Back", "#point1");
+// addButton("aButtonID", "buttonText", "attachmentPoint");
+
+function test1() {
+    console.log("\nFUNCITON TEST1 IS WORKING!!!!!!!!!!!!!!!!!\n")
+}
+test1();
 
 
 /**
 Application Loop
 */
 (function() {
-
+    console.log("\n##### ANONYMOUS LOOP FUNCTION WORKING!!!  #######\n")
 
     var departure = $('#Departure');
     var arrival = $('#Arrival')
@@ -144,7 +164,8 @@ Application Loop
                     console.log(departureObj.estimate.minutes['#text'])
                     var routeColor = departureObj.estimate.color['#text']
                 }
-                var body2 = $('body')
+                // var body2 = $('body')
+                var point3 = $('#point3')
                 var div2 = $('<div id="results" class="container">')
                 var destinationResults = $('<h5>')
                 var timeResults = $('<h6>')
@@ -157,7 +178,7 @@ Application Loop
                 }
 
                 $(timeResults).text(mins + " minutes")
-                $(body2).append(div2)
+                $(point3).append(div2)
                 $(div2).append(destinationResults)
                 $(div2).append(timeResults)
             })
