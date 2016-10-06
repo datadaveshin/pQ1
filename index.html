@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    
+
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- <meta http-equiv="X-UA-Compatible" content="ie=edge"> -->
@@ -15,15 +15,14 @@
     <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css"  media="screen,projection"> -->
 
-
     <!-- My CSS -->
     <!-- <link rel="stylesheet" href="css/master.css" media="screen" title="no title"> -->
 
-    <!-- jQuery first - note, materialize webpage notes the 2.1.1 version! -->
+    <!-- jQuery JS - PRECEDE AND USE 2.1.1 version with Materialize -->
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script> -->
 
-    <!-- Materialize JS -->
+    <!-- Materialize JS - Activate on top to overide their CSS -->
     <script type="text/javascript" src="js/materialize.min.js"></script>
 
     <title>BartBack</title>
@@ -43,68 +42,26 @@
         </div>
     </nav>
 
-
-
-
-    <!-- <div class="container">
-        <div data-role="page">
-            <div data-role="header">
-                <h1>Select Menus</h1>
-            </div>
-
-            <div data-role="main" class="ui-content">
-                <form method="post" action="demoform.asp">
-                    <fieldset class="ui-field-contain">
-                        <label for="day">Select Day</label>
-                        <select name="day" id="day">
-                  <option value="mon">Monday</option>
-                  <option value="tue">Tuesday</option>
-                  <option value="wed">Wednesday</option>
-                  <option value="thu">Thursday</option>
-                  <option value="fri">Friday</option>
-                  <option value="sat">Saturday</option>
-                  <option value="sun">Sunday</option>
-                </select>
-                    </fieldset>
-                    <input type="submit" data-inline="true" value="Submit">
-                </form>
-            </div>
-        </div>
-    </div> -->
-    <div class="container">
-    </div>
-
-    <!-- <div class="container">
-        <form class="ui-field-contain" action="index.html" method="post">
-            <label for="select-native-1">destination</label>
-            <select name="select-native-1" id="select-native-1">
-                <option value="mont">Montgomery</option>
-                <option value="12th">12th Street</option>
-                <option value="mlbr">Millbrae</option>
-            </select>
-        </form>
-
-    </div> -->
-
     <div class="container">
         <h1> </h1>
-        <button id="button" class="waves-effect waves-light btn">Real Time Departures</button>
+        <button id="button" class="waves-effect btn">Real Time Departures</button>
     </div>
 
-    <!-- <h3 id="result"></h3> -->
-    <!--Import jQuery before materialize.js-->
-    <!-- <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script> -->
-    <!-- <script type="text/javascript" src="js/jquery-3.1.1.min"></script> -->
-    <script type="text/javascript" src="js/materialize.min.js"></script>
+    <!-- ||||||  JavaScript  |||||| -->
+    <!-- vvvvvv     Code     vvvvvv -->
+
+    <!-- #### Materialize Scripts #### -->
+    <!-- # Materialize JS - Activate on bottom for their defaults to overide your CSS above -->
+    <!-- <script type="text/javascript" src="js/materialize.min.js"></script> -->
+
+    <!-- # Required by Materialize to render `select` tags -->
     <script>
-    /**
-    Required by Materialize to render <select> tags
-    Toggle on/off if using Materialize
-    */
     $(document).ready(function() {
         $('select').material_select();
     });
     </script>
+
+    <!-- #### App Scripts ####-->
     <script type="text/javascript" src="js/helperFunctions-1.js"></script>
     <script type="text/javascript" src="js/helperFunctions-2.js"></script>
     <script type="text/javascript" src="js/script.js"></script>

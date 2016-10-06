@@ -1,4 +1,5 @@
 "use strict";
+console.log('###$$$$$$@@@********  IN SCRIPT script.js *********@@@$$$$$$$###')
 
 /**
 Bart Station Abbreviations used by api
@@ -76,8 +77,12 @@ function genSelector(selectorName) {
 }
 
 
-// The Loop
+/**
+Application Loop
+*/
 (function() {
+
+
     var departure = $('#Departure');
     var arrival = $('#Arrival')
 
