@@ -81,7 +81,8 @@ function genSelector(selectorName) {
     $('button').click(function() {
         if ($(departure).val() !== "") {
             let userInput = $(departure).val();
-            sendRequest(userInput);
+            // sendRequest(userInput);
+            sendRequest('mont');
         }
     })
 
