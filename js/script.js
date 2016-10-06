@@ -174,13 +174,13 @@ Application Loop
                 $(destinationResults).css("backgroundColor", routeColor)
 
                 if (["RED", "GREEN", "BLUE"].indexOf(routeColor) !== -1) {
-                    $(destinationResults).css("color", "white")
+                    $(destinationResults).css("color", "white");
                 }
 
-                $(timeResults).text(mins + " minutes")
-                $(point3).append(div2)
-                $(div2).append(destinationResults)
-                $(div2).append(timeResults)
+                $(timeResults).text(mins + " minutes");
+                $(point3).append(div2);
+                $(div2).append(destinationResults);
+                $(div2).append(timeResults);
             })
         }
     }
