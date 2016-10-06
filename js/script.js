@@ -140,8 +140,11 @@ function genSelector(selectorName) {
         console.log("data:", data)
         // let result = $("#result")
         // $(result).text(data)
-        $( "div" ).remove( "#Departureselector" );
-        // $("#Departureselector").remove()
+
+
+        // $( "div" ).remove( "#Departureselector" );
+        $( "div" ).remove( "#results" );
+
 
         var xmlDoc = xmlToJson(data)
 
