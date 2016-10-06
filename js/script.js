@@ -67,7 +67,7 @@ function genSelector(selectorName) {
         // $('select').material_select();
     })
     console.log("selectorSelect: ", selectorSelect)
-    $('select').material_select(); // Needed to show selectors using materialize
+    // $('select').material_select(); // Needed to show selectors using materialize
 }
 
 // The Loop
