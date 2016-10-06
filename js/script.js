@@ -31,8 +31,8 @@ var stationObjArray = []; $$each(stationAbbrev, function(_dummy, idx) {
 console.log("stationObjArray:", stationObjArray)
 
 // Setup Selectors
-genSelector("Departure")
-genSelector("Arrival")
+// genSelector("Departure")
+// genSelector("Arrival")
 function genSelector(selectorName) {
     let body = $('body')
     let selectorDiv = $('<div>')
