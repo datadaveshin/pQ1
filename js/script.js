@@ -298,9 +298,14 @@ Application Loop
                 var est = departureObj.estimate;
                 console.log("est:", est)
                 if (Array.isArray(est)) {
-                    var mins = departureObj.estimate[0].minutes['#text']
-                    console.log(departureObj.estimate[0].minutes['#text'])
-                    var routeColor = departureObj.estimate[0].color['#text']
+                    $$each(est, function(anEst) {
+
+                    // var mins = departureObj.estimate[0].minutes['#text']
+                    // console.log(departureObj.estimate[0].minutes['#text'])
+                    // var routeColor = departureObj.estimate[0].color['#text']
+                    var mins = anEst.minutes['#text']
+                    console.log(anEst.minutes['#text'])
+                    var routeColor = anEst.color['#text']
 
                     //### Repeated code
                     var point3 = $('#point3')
@@ -321,6 +326,8 @@ Application Loop
                     $(div2).append(destinationResults);
                     $(div2).append(timeResults);
                     //### Repeated code
+
+                })
 
 
                 } else if (typeof est === 'object') {
