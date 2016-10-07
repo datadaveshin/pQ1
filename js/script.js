@@ -384,7 +384,8 @@ Application Loop
         }
 
         function output3() {
-            departureObjArr = $$filter(departureObjArr, function(departureObj) {
+            console.log("IN OUTPUT 3 BLOCK 1");
+            var departureObjArr1 = $$filter(departureObjArr, function(departureObj) {
                 let depAbbr = departureObj.abbreviation
                 console.log("Filter candidates", depAbbr['#text']);
                 // Change PREDICATE to reflect all trains going to abbreviation
@@ -396,7 +397,7 @@ Application Loop
                     return (clusterSFIA.indexOf(depAbbr['#text']) !== -1)
                 }
             })
-            $$each(departureObjArr, function(departureObj) {
+            $$each(departureObjArr1, function(departureObj) {
                 var dest = departureObj.destination['#text']
                 console.log("\n#### DESTINATION!!!!!!", dest, "\n")
                 console.log("departureObj", departureObj)
@@ -440,6 +441,75 @@ Application Loop
                 // })
 
             })
+
+
+            //########## Backwards block
+            console.log("IN OUTPUT 3 BLOCK 2");
+            var departureObjArr2 = $$filter(departureObjArr, function(departureObj) {
+                let depAbbr = departureObj.abbreviation
+                console.log("Filter candidates", depAbbr['#text']);
+                // Change PREDICATE to reflect all trains going to abbreviation
+                // if (reqDirection === "North") {
+                //     return depAbbr['#text'] === "RICH"
+                // } else
+
+                var testCase = "DALY"
+
+                if (clusterSanFran.indexOf(testCase) !== -1) {
+                    return (clusterSanFran.indexOf(testCase) !== -1 || clusterSFIA.indexOf(testCase) !== -1)
+                } else if (clusterSFIA.indexOf(testCase) !== -1) {
+                    return (clusterSFIA.indexOf(testCase) !== -1)
+                }
+            })
+            $$each(departureObjArr2, function(departureObj) {
+                var dest = departureObj.destination['#text']
+                console.log("\n#### DESTINATION!!!!!!", dest, "\n")
+                console.log("departureObj", departureObj)
+                console.log(departureObj.destination['#text'])
+
+                var est = departureObj.estimate;
+                console.log("est:", est)
+                if (Array.isArray(est) === false) {
+                    est = [est];
+                }
+                // if (Array.isArray(est)) {
+                // $$each(est, function(anEst) {
+
+                    // var mins = departureObj.estimate[0].minutes['#text']
+                    // console.log(departureObj.estimate[0].minutes['#text'])
+                    // var routeColor = departureObj.estimate[0].color['#text']
+                    var mins = est[0].minutes['#text']
+                    console.log(est[0].minutes['#text'])
+                    var routeColor = est[0].color['#text']
+
+                    //### Repeated code
+                    var point3 = $('#point3')
+
+                    var div2b = $('<div id="results" class="container">')
+                    var destinationResults = $('<h5>')
+                    var timeResults = $('<h6>')
+                    console.log("$(timeResults)", $(timeResults))
+                    $(destinationResults).text(dest + " Train")
+                    $(destinationResults).css("backgroundColor", routeColor)
+
+                    if (["RED", "GREEN", "BLUE"].indexOf(routeColor) !== -1) {
+                        $(destinationResults).css("color", "white");
+                    }
+
+                    $(timeResults).text(mins + " minutes");
+                    $(point3).append(div2b);
+                    $(div2b).append(destinationResults);
+                    $(div2b).append(timeResults);
+                    //### Repeated code
+
+                // })
+
+            })
+
+            // ########## Backwards block end
+
+
+
         }
 
     };
