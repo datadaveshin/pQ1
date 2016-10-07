@@ -9,7 +9,7 @@ var stationAbbrev = ["12th","16th","19th","24th","ashb","balb","bayf","cast","ci
 /**
 Bar Station Full Names used by api
 */
-var stationFull = ["12th St. Oakland City Center","16th St. Mission (SF)","19th St. Oakland","24th St. Mission (SF)","Ashby (Berkeley)","Balboa Park (SF)","Bay Fair (San Leandro)","Castro Valley","Civic Center (SF)","Coliseum","Colma","Concord","Daly City","Downtown Berkeley","Dublin/Pleasanton","El Cerrito del Norte","El Cerrito Plaza","Embarcadero (SF)","Fremont","Fruitvale (Oakland)","Glen Park (SF)","Hayward","Lafayette","Lake M   erritt (Oakland)","MacArthur (Oaklanßd)","Millbrae","Montgomery St.ß (SF)","North Berkeley","North Concord/Martinez","Oakland Int'l Airport","Orinda","Pittsburg/Bay Point","Pleasant Hill","Powell St. (SF)","Richmond","Rockridge (Oakland)","San Bruno","San Francisco Int'l Airport","San Leandro","South Hayward","South San Francisco","Union City","Warm Springs/South Fremont","Walnut Creek","West Dublin","West Oakland"]
+var stationFull = ["12th St. Oakland City Center","16th St. Mission (SF)","19th St. Oakland","24th St. Mission (SF)","Ashby (Berkeley)","Balboa Park (SF)","Bay Fair (San Leandro)","Castro Valley","Civic Center (SF)","Coliseum","Colma","Concord","Daly City","Downtown Berkeley","Dublin/Pleasanton","El Cerrito del Norte","El Cerrito Plaza","Embarcadero (SF)","Fremont","Fruitvale (Oakland)","Glen Park (SF)","Hayward","Lafayette","Lake M   erritt (Oakland)","MacArthur (Oaklanßd)","Millbrae","Montgomery St. (SF)","North Berkeley","North Concord/Martinez","Oakland Int'l Airport","Orinda","Pittsburg/Bay Point","Pleasant Hill","Powell St. (SF)","Richmond","Rockridge (Oakland)","San Bruno","San Francisco Int'l Airport","San Leandro","South Hayward","South San Francisco","Union City","Warm Springs/South Fremont","Walnut Creek","West Dublin","West Oakland"]
 
 /**
 Define a Station Class
@@ -93,7 +93,7 @@ function addButton(aButtonID, buttonText, attachmentPoint) {
 }
 
 addButton("button", "Real Time", "#point1");
-addButton("button2", "Bart Back", "#point1");
+addButton("button2", "Get Seat", "#point1");
 // addButton("aButtonID", "buttonText", "attachmentPoint");
 
 function test1() {
@@ -108,38 +108,41 @@ Application Loop
 (function() {
     console.log("\n##### ANONYMOUS LOOP FUNCTION WORKING!!!  #######\n")
 
-    var departure = $('#Departure');
-    var arrival = $('#Arrival')
 
-    console.log("$(departure):", $(departure))
+    // console.log("$(departure):", $(departure))
 
     // Set up
     $('button').click(function() {
-        if ($(departure).val() !== "") {
-            let userInput = $(departure).val();
-            sendRequest(userInput);
-            // sendRequest('mont');
+        let departure = $('#Departure');
+        let arrival = $('#Arrival')
+        let depVal = $(departure).val()
+        let arrVal = $(arrival).val()
+        console.log("Departure Val~~~~~~~~~~~~~~~~~>", depVal)
+        console.log("Arrival Val~~~~~~~~~~~~~~~~~>", arrVal)
+
+        if (depVal !== "default" && arrVal === "default") {
+            sendDepRealReq(depVal);
+        }
+        else if (depVal !== "default" && arrVal !== "default") {
+            console.log("both in the house");
         }
     })
 
-    function sendRequest(search) {
+    function sendDepRealReq(search) {
     // Request Departure Object for AJAX
         const getin = 'MW9S-E7SL-26DU-VV8V'
         let departureObj = {
             url: `http://api.bart.gov/api/etd.aspx?cmd=etd&orig=${search}&key=${getin}`,
             method: "GET",
-            success: departureSuccess
+            success: depRealSuccess
         };
         // Start the AJAX request
         $.ajax(departureObj);
     }
 
-    function departureSuccess(data) {
+    function depRealSuccess(data) {
         console.log("data:", data)
-        // let result = $("#result")
-        // $(result).text(data)
-
-        // $( "div" ).remove( "#Departureselector" );
+        
         $( "div" ).remove( "#results" );
 
         var xmlDoc = xmlToJson(data)
@@ -147,10 +150,10 @@ Application Loop
 
         if (Array.isArray(xmlDoc.root.station.etd)) {
             $$each(xmlDoc.root.station.etd, function(departureObj) {
+                var dest = departureObj.destination['#text']
+                console.log("\n#### DESTINATION!!!!!!", dest, "\n")
                 console.log("departureObj", departureObj)
                 console.log(departureObj.destination['#text'])
-                var dest = departureObj.destination['#text']
-                console.log("DEST!!!!!!", dest)
 
                 var est = departureObj.estimate;
                 console.log("est:", est)
