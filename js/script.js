@@ -285,9 +285,9 @@ Application Loop
 
         function output2() {
             departureObjArr = $$filter(departureObjArr, function(departureObj) {
-                console.log("Filter candidates", departureObj.destination['#text']);
-                // Change PREDICATE to reflect all trains going to destination
-                return departureObj.destination['#text'] === "Richmond"
+                console.log("Filter candidates", departureObj.abbreviation['#text']);
+                // Change PREDICATE to reflect all trains going to abbreviation
+                return departureObj.abbreviation['#text'] === "RICH"
             })
             $$each(departureObjArr, function(departureObj) {
                 var dest = departureObj.destination['#text']
