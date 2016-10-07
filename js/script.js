@@ -120,7 +120,7 @@ Setup Buttons
 */
 function addButton(aButtonID, buttonText, attachmentPoint) {
     let newButton = $('<button>')
-    $(newButton).addClass("waves-effect btn col s6")
+    $(newButton).addClass("waves-effect btn col s4")
     $(newButton).attr("id", aButtonID)
     $(newButton).text(buttonText)
 
@@ -131,7 +131,8 @@ function addButton(aButtonID, buttonText, attachmentPoint) {
     console.log("$(sectionPart)", $(sectionPart));
 }
 
-addButton("realTime", "Real Time", "#point1");
+addButton("realTime", "All Trains", "#point1");
+addButton("directTrains", "Direct", "#point1");
 addButton("getSeat", "Get Seat", "#point1");
 // addButton("aButtonID", "buttonText", "attachmentPoint");
 
@@ -177,6 +178,29 @@ Application Loop
         else if (depVal !== "default" && arrVal === "default") {
             returnCondition = 1;
             sendDepRealReq(depVal);
+        }
+        else if (depVal !== "default" && arrVal !== "default") {
+            returnCondition = 1;
+            reqDirection = checkDirection(depVal, arrVal) // Will return array later with all related lines to account for multiple trains
+            console.log("both in the house - reqDirection is", reqDirection);
+            sendDepRealReq(depVal);
+        }
+
+    });
+
+    $('#directTrains').click(function() {
+        let departure = $('#Departure');
+        let arrival = $('#Arrival')
+        depVal = $(departure).val()
+        arrVal = $(arrival).val()
+        console.log("\n\n\n\nDeparture Val~~~~~~~~~~~~~~~~~>", depVal)
+        console.log("Arrival Val~~~~~~~~~~~~~~~~~>", arrVal)
+        if (depVal === "default" && arrVal === "default") {
+            returnCondition = 1;
+        }
+        else if (depVal !== "default" && arrVal === "default") {
+            returnCondition = 1;
+            // sendDepRealReq(depVal);
         }
         else if (depVal !== "default" && arrVal !== "default") {
             returnCondition = 2;
