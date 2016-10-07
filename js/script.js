@@ -6,6 +6,8 @@ Initialize Departure arrays and variables
 destArrBack0 is your station
 destArrBack1 is one station back, etc.
 */
+var depVal;
+var arrVal;
 var destArrBack0 = [];
 var destArrBack1 = [];
 var destArrBack2 = [];
@@ -165,8 +167,8 @@ Application Loop
     $('#realTime').click(function() {
         let departure = $('#Departure');
         let arrival = $('#Arrival')
-        let depVal = $(departure).val()
-        let arrVal = $(arrival).val()
+        depVal = $(departure).val()
+        arrVal = $(arrival).val()
         console.log("\n\n\n\nDeparture Val~~~~~~~~~~~~~~~~~>", depVal)
         console.log("Arrival Val~~~~~~~~~~~~~~~~~>", arrVal)
         if (depVal === "default" && arrVal === "default") {
@@ -286,12 +288,12 @@ Application Loop
         function output2() {
             departureObjArr = $$filter(departureObjArr, function(departureObj) {
                 let depAbbr = departureObj.abbreviation
-                console.log("Filter candidates", departureObj.abbreviation['#text']);
+                console.log("Filter candidates", depAbbr['#text']);
                 // Change PREDICATE to reflect all trains going to abbreviation
                 if (reqDirection === "North") {
-                    return departureObj.abbreviation['#text'] === "RICH"
+                    return depAbbr['#text'] === "RICH"
                 } else if (reqDirection === "South") {
-                    return departureObj.direction['#text'] === "South"
+                    return depAbbr['#text'] === "DALY"
                 }
             })
             $$each(departureObjArr, function(departureObj) {
