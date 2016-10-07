@@ -292,8 +292,10 @@ Application Loop
                 // Change PREDICATE to reflect all trains going to abbreviation
                 if (reqDirection === "North") {
                     return depAbbr['#text'] === "RICH"
-                } else if (reqDirection === "South") {
-                    return depAbbr['#text'] === "DALY"
+                } else if (clusterSanFran.indexOf(arrVal.toUpperCase()) !== -1) {
+                    return (clusterSanFran.indexOf(depAbbr['#text']) !== -1 || clusterSFIA.indexOf(depAbbr['#text']) !== -1)
+                } else if (clusterSFIA.indexOf(arrVal.toUpperCase()) !== -1) {
+                    return (clusterSFIA.indexOf(depAbbr['#text']) !== -1)
                 }
             })
             $$each(departureObjArr, function(departureObj) {
