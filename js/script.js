@@ -11,6 +11,9 @@ Bar Station Full Names used by api
 */
 var stationFull = ["12th St. Oakland City Center","16th St. Mission (SF)","19th St. Oakland","24th St. Mission (SF)","Ashby (Berkeley)","Balboa Park (SF)","Bay Fair (San Leandro)","Castro Valley","Civic Center (SF)","Coliseum","Colma","Concord","Daly City","Downtown Berkeley","Dublin/Pleasanton","El Cerrito del Norte","El Cerrito Plaza","Embarcadero (SF)","Fremont","Fruitvale (Oakland)","Glen Park (SF)","Hayward","Lafayette","Lake M   erritt (Oakland)","MacArthur (Oaklanßd)","Millbrae","Montgomery St. (SF)","North Berkeley","North Concord/Martinez","Oakland Int'l Airport","Orinda","Pittsburg/Bay Point","Pleasant Hill","Powell St. (SF)","Richmond","Rockridge (Oakland)","San Bruno","San Francisco Int'l Airport","San Leandro","South Hayward","South San Francisco","Union City","Warm Springs/South Fremont","Walnut Creek","West Dublin","West Oakland"]
 
+var route8 = ["MLBR", "SBRN", "SSAN", "COLM", "DALY", "BALB", "GLEN", "24TH", "16TH", "CIVC", "POWL", "MONT", "EMBR", "WOAK", "12TH", "19TH", "MCAR", "ASHB", "DBRK", "NBRK", "PLZA", "DELN", "RICH"]
+
+
 /**
 Define a Station Class
 */
@@ -142,11 +145,13 @@ Application Loop
 
     function depRealSuccess(data) {
         console.log("data:", data)
-        
+
         $( "div" ).remove( "#results" );
 
         var xmlDoc = xmlToJson(data)
         console.log("xmlDoc", xmlDoc)
+
+        let departureArray = [];
 
         if (Array.isArray(xmlDoc.root.station.etd)) {
             $$each(xmlDoc.root.station.etd, function(departureObj) {

@@ -1,0 +1,18 @@
+<name>Oakland Int'l Airport - Coliseum</name>
+<abbr>OAKL-COLS</abbr>
+<routeID>ROUTE 20</routeID>
+<number>20</number>
+<origin>OAKL</origin>
+<destination>COLS</destination>
+<direction>south</direction>
+<color>#d5cfa3</color>
+<holidays>1</holidays>
+<num_stns>2</num_stns>
+<config>
+<station>OAKL</station>
+<station>COLS</station>
+</config>
+</route>
+</routes>
+<message/>
+</root>

@@ -1,0 +1,34 @@
+<name>Warm Springs/South Fremont - Daly City</name>
+<abbr>WARM-DALY</abbr>
+<routeID>ROUTE 5</routeID>
+<number>5</number>
+<origin>WARM</origin>
+<destination>DALY</destination>
+<direction/>
+<color>#339933</color>
+<holidays>0</holidays>
+<num_stns>20</num_stns>
+<config>
+<station>WARM</station>
+<station>FRMT</station>
+<station>UCTY</station>
+<station>SHAY</station>
+<station>HAYW</station>
+<station>BAYF</station>
+<station>SANL</station>
+<station>COLS</station>
+<station>FTVL</station>
+<station>LAKE</station>
+<station>WOAK</station>
+<station>EMBR</station>
+<station>MONT</station>
+<station>POWL</station>
+<station>CIVC</station>
+<station>16TH</station>
+<station>24TH</station>
+<station>GLEN</station>
+<station>BALB</station>
+<station>DALY</station>
+</config>
+</route>
+<route>

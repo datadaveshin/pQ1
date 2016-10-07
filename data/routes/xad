@@ -1,0 +1,33 @@
+<name>Warm Springs/South Fremont - Richmond</name>
+<abbr>WARM-RICH</abbr>
+<routeID>ROUTE 3</routeID>
+<number>3</number>
+<origin>WARM</origin>
+<destination>RICH</destination>
+<direction/>
+<color>#ff9933</color>
+<holidays>1</holidays>
+<num_stns>19</num_stns>
+<config>
+<station>WARM</station>
+<station>FRMT</station>
+<station>UCTY</station>
+<station>SHAY</station>
+<station>HAYW</station>
+<station>BAYF</station>
+<station>SANL</station>
+<station>COLS</station>
+<station>FTVL</station>
+<station>LAKE</station>
+<station>12TH</station>
+<station>19TH</station>
+<station>MCAR</station>
+<station>ASHB</station>
+<station>DBRK</station>
+<station>NBRK</station>
+<station>PLZA</station>
+<station>DELN</station>
+<station>RICH</station>
+</config>
+</route>
+<route>
