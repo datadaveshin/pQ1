@@ -190,12 +190,22 @@ Application Loop
     $('#getSeat').click(function() {
         let departure = $('#Departure');
         let arrival = $('#Arrival')
-        let depVal = $(departure).val()
-        let arrVal = $(arrival).val()
-        console.log("Departure Val~~~~~~~~~~~~~~~~~>", depVal)
+        depVal = $(departure).val()
+        arrVal = $(arrival).val()
+        console.log("\n\n\n\nDeparture Val~~~~~~~~~~~~~~~~~>", depVal)
         console.log("Arrival Val~~~~~~~~~~~~~~~~~>", arrVal)
-        returnCondition = 3;
-        sendGetSeatReq(depVal);
+        if (depVal === "default" && arrVal === "default") {
+            returnCondition = 1;
+        }
+        else if (depVal !== "default" && arrVal === "default") {
+            returnCondition = 1;
+        }
+        else if (depVal !== "default" && arrVal !== "default") {
+            returnCondition = 3;
+            reqDirection = checkDirection(depVal, arrVal) // Will return array later with all related lines to account for multiple trains
+            console.log("both in the house - reqDirection is", reqDirection);
+            sendDepRealReq(depVal);
+        }
     });
 
     // console.log("$$ THE returnCondition $$", returnCondition);
@@ -240,6 +250,9 @@ Application Loop
         }
         else if (returnCondition === 2) {
             output2();
+        }
+        else if (returnCondition === 3) {
+            output3();
         }
 
         /*
@@ -367,35 +380,94 @@ Application Loop
 
                 }
 
-                /*
-                TODO in morning --
-                put this block in the if and else if blocks above
-                for a quick fix to get all trains running, must add another each statement in the if (Array.isArray(est)) block!!!
-                */
+            });
+        }
 
-                // var point3 = $('#point3')
-                //
-                // var div2 = $('<div id="results" class="container">')
-                // var destinationResults = $('<h5>')
-                // var timeResults = $('<h6>')
-                // console.log("$(timeResults)", $(timeResults))
-                // $(destinationResults).text(dest + " Train")
-                // $(destinationResults).css("backgroundColor", routeColor)
-                //
-                // if (["RED", "GREEN", "BLUE"].indexOf(routeColor) !== -1) {
-                //     $(destinationResults).css("color", "white");
-                // }
-                //
-                // $(timeResults).text(mins + " minutes");
-                // $(point3).append(div2);
-                // $(div2).append(destinationResults);
-                // $(div2).append(timeResults);
+        function output3() {
+            departureObjArr = $$filter(departureObjArr, function(departureObj) {
+                let depAbbr = departureObj.abbreviation
+                console.log("Filter candidates", depAbbr['#text']);
+                // Change PREDICATE to reflect all trains going to abbreviation
+                if (reqDirection === "North") {
+                    return depAbbr['#text'] === "RICH"
+                } else if (clusterSanFran.indexOf(arrVal.toUpperCase()) !== -1) {
+                    return (clusterSanFran.indexOf(depAbbr['#text']) !== -1 || clusterSFIA.indexOf(depAbbr['#text']) !== -1)
+                } else if (clusterSFIA.indexOf(arrVal.toUpperCase()) !== -1) {
+                    return (clusterSFIA.indexOf(depAbbr['#text']) !== -1)
+                }
+            })
+            $$each(departureObjArr, function(departureObj) {
+                var dest = departureObj.destination['#text']
+                console.log("\n#### DESTINATION!!!!!!", dest, "\n")
+                console.log("departureObj", departureObj)
+                console.log(departureObj.destination['#text'])
+
+                var est = departureObj.estimate;
+                console.log("est:", est)
+                if (Array.isArray(est)) {
+                    $$each(est, function(anEst) {
+
+                    // var mins = departureObj.estimate[0].minutes['#text']
+                    // console.log(departureObj.estimate[0].minutes['#text'])
+                    // var routeColor = departureObj.estimate[0].color['#text']
+                    var mins = anEst.minutes['#text']
+                    console.log(anEst.minutes['#text'])
+                    var routeColor = anEst.color['#text']
+
+                    //### Repeated code
+                    var point3 = $('#point3')
+
+                    var div2 = $('<div id="results" class="container">')
+                    var destinationResults = $('<h5>')
+                    var timeResults = $('<h6>')
+                    console.log("$(timeResults)", $(timeResults))
+                    $(destinationResults).text(dest + " Train")
+                    $(destinationResults).css("backgroundColor", routeColor)
+
+                    if (["RED", "GREEN", "BLUE"].indexOf(routeColor) !== -1) {
+                        $(destinationResults).css("color", "white");
+                    }
+
+                    $(timeResults).text(mins + " minutes");
+                    $(point3).append(div2);
+                    $(div2).append(destinationResults);
+                    $(div2).append(timeResults);
+                    //### Repeated code
+
+                })
+
+                } else if (typeof est === 'object') {
+                    console.log("typeof est:", est)
+                    var mins = departureObj.estimate.minutes['#text']
+                    console.log(departureObj.estimate.minutes['#text'])
+                    var routeColor = departureObj.estimate.color['#text']
+
+                    //### Repeated code
+                    var point3 = $('#point3')
+
+                    var div2 = $('<div id="results" class="container">')
+                    var destinationResults = $('<h5>')
+                    var timeResults = $('<h6>')
+                    console.log("$(timeResults)", $(timeResults))
+                    $(destinationResults).text(dest + " Train")
+                    $(destinationResults).css("backgroundColor", routeColor)
+
+                    if (["RED", "GREEN", "BLUE"].indexOf(routeColor) !== -1) {
+                        $(destinationResults).css("color", "white");
+                    }
+
+                    $(timeResults).text(mins + " minutes");
+                    $(point3).append(div2);
+                    $(div2).append(destinationResults);
+                    $(div2).append(timeResults);
+                    //### Repeated code
+
+                }
+
             })
         }
 
-
     };
-// ##################################################
 
 })();
 
