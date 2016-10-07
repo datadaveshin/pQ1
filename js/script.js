@@ -2,6 +2,26 @@
 console.log('###$$$$$$@@@********  IN SCRIPT script.js *********@@@$$$$$$$###')
 
 /**
+Initialize Departure arrays and variables
+destArrBack0 is your station
+destArrBack1 is one station back, etc.
+*/
+var destArrBack0 = [];
+var destArrBack1 = [];
+var destArrBack2 = [];
+var destArrBack3 = [];
+var reqDirection;
+
+/**
+Initialize returnCondition
+0 = no options
+1 = realtime full list for the Departure station
+2 = realtime filtered list for Departure station based on direction
+3 = get seat filters for direct trip, reverse directions
+*/
+var returnCondition = 0;
+
+/**
 Bart Station Abbreviations used by api
 */
 var stationAbbrev = ["12th","16th","19th","24th","ashb","balb","bayf","cast","civc","cols","colm","conc","daly","dbrk","dubl","deln","plza","embr","frmt","ftvl","glen","hayw","lafy","lake","mcar","mlbr","mont","nbrk","ncon","oakl","orin","pitt","phil","powl","rich","rock","sbrn","sfia","sanl","shay","ssan","ucty","warm","wcrk","wdub","woak"]
@@ -9,9 +29,12 @@ var stationAbbrev = ["12th","16th","19th","24th","ashb","balb","bayf","cast","ci
 /**
 Bar Station Full Names used by api
 */
-var stationFull = ["12th St. Oakland City Center","16th St. Mission (SF)","19th St. Oakland","24th St. Mission (SF)","Ashby (Berkeley)","Balboa Park (SF)","Bay Fair (San Leandro)","Castro Valley","Civic Center (SF)","Coliseum","Colma","Concord","Daly City","Downtown Berkeley","Dublin/Pleasanton","El Cerrito del Norte","El Cerrito Plaza","Embarcadero (SF)","Fremont","Fruitvale (Oakland)","Glen Park (SF)","Hayward","Lafayette","Lake M   erritt (Oakland)","MacArthur (Oaklanßd)","Millbrae","Montgomery St. (SF)","North Berkeley","North Concord/Martinez","Oakland Int'l Airport","Orinda","Pittsburg/Bay Point","Pleasant Hill","Powell St. (SF)","Richmond","Rockridge (Oakland)","San Bruno","San Francisco Int'l Airport","San Leandro","South Hayward","South San Francisco","Union City","Warm Springs/South Fremont","Walnut Creek","West Dublin","West Oakland"]
+var stationFull = ["12th St. Oakland City Center","16th St. Mission (SF)","19th St. Oakland","24th St. Mission (SF)","Ashby (Berkeley)","Balboa Park (SF)","Bay Fair (San Leandro)","Castro Valley","Civic Center (SF)","Coliseum","Colma","Concord","Daly City","Downtown Berkeley","Dublin/Pleasanton","El Cerrito del Norte","El Cerrito Plaza","Embarcadero (SF)","Fremont","Fruitvale (Oakland)","Glen Park (SF)","Hayward","Lafayette","Lake Merritt (Oakland)","MacArthur (Oaklanßd)","Millbrae","Montgomery St. (SF)","North Berkeley","North Concord/Martinez","Oakland Int'l Airport","Orinda","Pittsburg/Bay Point","Pleasant Hill","Powell St. (SF)","Richmond","Rockridge (Oakland)","San Bruno","San Francisco Int'l Airport","San Leandro","South Hayward","South San Francisco","Union City","Warm Springs/South Fremont","Walnut Creek","West Dublin","West Oakland"]
 
 var route8 = ["MLBR", "SBRN", "SSAN", "COLM", "DALY", "BALB", "GLEN", "24TH", "16TH", "CIVC", "POWL", "MONT", "EMBR", "WOAK", "12TH", "19TH", "MCAR", "ASHB", "DBRK", "NBRK", "PLZA", "DELN", "RICH"]
+
+route8 = route8.map(function(item) {return item.toLowerCase();});
+console.log("route8", route8)
 
 
 /**
@@ -95,8 +118,8 @@ function addButton(aButtonID, buttonText, attachmentPoint) {
     console.log("$(sectionPart)", $(sectionPart));
 }
 
-addButton("button", "Real Time", "#point1");
-addButton("button2", "Get Seat", "#point1");
+addButton("realTime", "Real Time", "#point1");
+addButton("getSeat", "Get Seat", "#point1");
 // addButton("aButtonID", "buttonText", "attachmentPoint");
 
 function test1() {
@@ -104,32 +127,65 @@ function test1() {
 }
 test1();
 
+function checkDirection(here, there) {
+    /* TODO use a full route array and check for here and there in it all of them, return a subArray, then do the calculation. For now, using route8 for a test*/
+    let routeArr = route8 // THE TEST ARRAY TO BE REMOVED
+    let hereIdx = routeArr.indexOf(here)
+    let thereIdx = routeArr.indexOf(there)
+    console.log("hereIdx", hereIdx, "thereIdx", thereIdx);
+    if (thereIdx > hereIdx) {
+        return "North"
+    } else if (thereIdx < hereIdx) {
+        return "South"
+    } else if (thereIdx === hereIdx) {
+        return "Same"
+    }
+}
 
 /**
 Application Loop
 */
 (function() {
-    console.log("\n##### ANONYMOUS LOOP FUNCTION WORKING!!!  #######\n")
-
+    console.log("\n\n\n##### ANONYMOUS LOOP FUNCTION WORKING!!!  #######\n")
 
     // console.log("$(departure):", $(departure))
 
     // Set up
-    $('button').click(function() {
+    $('#realTime').click(function() {
+        let departure = $('#Departure');
+        let arrival = $('#Arrival')
+        let depVal = $(departure).val()
+        let arrVal = $(arrival).val()
+        console.log("\n\n\n\nDeparture Val~~~~~~~~~~~~~~~~~>", depVal)
+        console.log("Arrival Val~~~~~~~~~~~~~~~~~>", arrVal)
+        if (depVal === "default" && arrVal === "default") {
+            returnCondition = 1;
+        }
+        else if (depVal !== "default" && arrVal === "default") {
+            returnCondition = 1;
+            sendDepRealReq(depVal);
+        }
+        else if (depVal !== "default" && arrVal !== "default") {
+            returnCondition = 2;
+            reqDirection = checkDirection(depVal, arrVal)
+            console.log("both in the house - reqDirection is", reqDirection);
+            sendDepRealReq(depVal);
+        }
+
+    });
+
+    $('#getSeat').click(function() {
         let departure = $('#Departure');
         let arrival = $('#Arrival')
         let depVal = $(departure).val()
         let arrVal = $(arrival).val()
         console.log("Departure Val~~~~~~~~~~~~~~~~~>", depVal)
         console.log("Arrival Val~~~~~~~~~~~~~~~~~>", arrVal)
+        returnCondition = 3;
+        sendGetSeatReq(depVal);
+    });
 
-        if (depVal !== "default" && arrVal === "default") {
-            sendDepRealReq(depVal);
-        }
-        else if (depVal !== "default" && arrVal !== "default") {
-            console.log("both in the house");
-        }
-    })
+    // console.log("$$ THE returnCondition $$", returnCondition);
 
     function sendDepRealReq(search) {
     // Request Departure Object for AJAX
@@ -141,7 +197,7 @@ Application Loop
         };
         // Start the AJAX request
         $.ajax(departureObj);
-    }
+    };
 
     function depRealSuccess(data) {
         console.log("data:", data)
@@ -151,10 +207,27 @@ Application Loop
         var xmlDoc = xmlToJson(data)
         console.log("xmlDoc", xmlDoc)
 
-        let departureArray = [];
-
+        // let departureAllCarArr = [];
+        // let departureSingleCarArr = [];
+        let departureObjArr = [];
         if (Array.isArray(xmlDoc.root.station.etd)) {
             $$each(xmlDoc.root.station.etd, function(departureObj) {
+                departureObjArr.push(departureObj)
+            });
+        } else if (typeof xmlDoc.root.station.etd === 'object') {
+            departureObjArr.push(xmlDoc.root.station.etd)
+        }
+        console.log("$$ THE returnCondition $$", returnCondition);
+
+        console.log("OUR NEW departureObjArr", departureObjArr);
+
+        // if (returnCondition === 2) {
+        //     var reqDirection = checkDirection()
+        // }
+
+        /* PRINT RESULTS FOR RETURN CONDITION 1) */
+        if (returnCondition === 1) {
+            $$each(departureObjArr, function(departureObj) {
                 var dest = departureObj.destination['#text']
                 console.log("\n#### DESTINATION!!!!!!", dest, "\n")
                 console.log("departureObj", departureObj)
@@ -191,8 +264,11 @@ Application Loop
                 $(div2).append(timeResults);
             })
         }
-    }
+    };
+// ##################################################
+
 })();
+
 
 // Copyright David Shin 2016
 // All Rights Reserved
