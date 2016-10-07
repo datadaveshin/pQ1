@@ -96,7 +96,7 @@ function genSelector(selectorName, attachmentPoint) {
     $(selectorSelect).attr("id", selectorName)
     // $(selectorSelect).addClass("browser-default")
     $(selectorDefaultOption).val("default")
-    $(selectorDefaultOption).text("Choose Train")
+    $(selectorDefaultOption).text(selectorName + " Station")
 
     // Build Dom
     $(point1).append(selectorDiv)
@@ -291,7 +291,7 @@ Application Loop
                 if (reqDirection === "North") {
                     return departureObj.abbreviation['#text'] === "RICH"
                 } else if (reqDirection === "South") {
-                    return "DALY"
+                    return departureObj.direction['#text'] === "South"
                 }
             })
             $$each(departureObjArr, function(departureObj) {
