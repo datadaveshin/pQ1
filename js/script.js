@@ -404,15 +404,18 @@ Application Loop
 
                 var est = departureObj.estimate;
                 console.log("est:", est)
-                if (Array.isArray(est)) {
-                    $$each(est, function(anEst) {
+                if (Array.isArray(est) === false) {
+                    est = [est];
+                }
+                // if (Array.isArray(est)) {
+                // $$each(est, function(anEst) {
 
                     // var mins = departureObj.estimate[0].minutes['#text']
                     // console.log(departureObj.estimate[0].minutes['#text'])
                     // var routeColor = departureObj.estimate[0].color['#text']
-                    var mins = anEst.minutes['#text']
-                    console.log(anEst.minutes['#text'])
-                    var routeColor = anEst.color['#text']
+                    var mins = est[0].minutes['#text']
+                    console.log(est[0].minutes['#text'])
+                    var routeColor = est[0].color['#text']
 
                     //### Repeated code
                     var point3 = $('#point3')
@@ -434,35 +437,7 @@ Application Loop
                     $(div2).append(timeResults);
                     //### Repeated code
 
-                })
-
-                } else if (typeof est === 'object') {
-                    console.log("typeof est:", est)
-                    var mins = departureObj.estimate.minutes['#text']
-                    console.log(departureObj.estimate.minutes['#text'])
-                    var routeColor = departureObj.estimate.color['#text']
-
-                    //### Repeated code
-                    var point3 = $('#point3')
-
-                    var div2 = $('<div id="results" class="container">')
-                    var destinationResults = $('<h5>')
-                    var timeResults = $('<h6>')
-                    console.log("$(timeResults)", $(timeResults))
-                    $(destinationResults).text(dest + " Train")
-                    $(destinationResults).css("backgroundColor", routeColor)
-
-                    if (["RED", "GREEN", "BLUE"].indexOf(routeColor) !== -1) {
-                        $(destinationResults).css("color", "white");
-                    }
-
-                    $(timeResults).text(mins + " minutes");
-                    $(point3).append(div2);
-                    $(div2).append(destinationResults);
-                    $(div2).append(timeResults);
-                    //### Repeated code
-
-                }
+                // })
 
             })
         }
