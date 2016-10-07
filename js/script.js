@@ -285,9 +285,14 @@ Application Loop
 
         function output2() {
             departureObjArr = $$filter(departureObjArr, function(departureObj) {
+                let depAbbr = departureObj.abbreviation
                 console.log("Filter candidates", departureObj.abbreviation['#text']);
                 // Change PREDICATE to reflect all trains going to abbreviation
-                return departureObj.abbreviation['#text'] === "RICH"
+                if (reqDirection === "North") {
+                    return departureObj.abbreviation['#text'] === "RICH"
+                } else if (reqDirection === "South") {
+                    return "DALY"
+                }
             })
             $$each(departureObjArr, function(departureObj) {
                 var dest = departureObj.destination['#text']
