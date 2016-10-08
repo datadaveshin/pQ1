@@ -33,6 +33,7 @@ Bar Station Full Names used by api
 */
 var stationFull = ["12th St. Oakland City Center","16th St. Mission (SF)","19th St. Oakland","24th St. Mission (SF)","Ashby (Berkeley)","Balboa Park (SF)","Bay Fair (San Leandro)","Castro Valley","Civic Center (SF)","Coliseum","Colma","Concord","Daly City","Downtown Berkeley","Dublin/Pleasanton","El Cerrito del Norte","El Cerrito Plaza","Embarcadero (SF)","Fremont","Fruitvale (Oakland)","Glen Park (SF)","Hayward","Lafayette","Lake Merritt (Oakland)","MacArthur (Oaklanßd)","Millbrae","Montgomery St. (SF)","North Berkeley","North Concord/Martinez","Oakland Int'l Airport","Orinda","Pittsburg/Bay Point","Pleasant Hill","Powell St. (SF)","Richmond","Rockridge (Oakland)","San Bruno","San Francisco Int'l Airport","San Leandro","South Hayward","South San Francisco","Union City","Warm Springs/South Fremont","Walnut Creek","West Dublin","West Oakland"]
 
+// Define Routes
 var route8 = ["MLBR", "SBRN", "SSAN", "COLM", "DALY", "BALB", "GLEN", "24TH", "16TH", "CIVC", "POWL", "MONT", "EMBR", "WOAK", "12TH", "19TH", "MCAR", "ASHB", "DBRK", "NBRK", "PLZA", "DELN", "RICH"]
 
 route8 = route8.map(function(item) {return item.toLowerCase();});
@@ -43,7 +44,7 @@ var route2 = ["MLBR", "SFIA", "SBRN", "SSAN", "COLM", "DALY", "BALB", "GLEN", "2
 route2 = route2.map(function(item) {return item.toLowerCase();});
 console.log("route2", route2)
 
-// make clusters a class later
+// Make Clusters
 var clusterRICH = ["ASHB", "DBRK", "NBRK", "PLZA", "DELN", "RICH"]
 
 var clusterSFIA = ["MLBR", "SFIA", "SBRN", "SSAN", "COLM"]
@@ -391,35 +392,12 @@ Application Loop
 
                 }
 
-                /*
-                TODO in morning --
-                put this block in the if and else if blocks above
-                for a quick fix to get all trains running, must add another each statement in the if (Array.isArray(est)) block!!!
-                */
-
-                // var point3 = $('#point3')
-                //
-                // var div2 = $('<div id="results" class="container">')
-                // var destinationResults = $('<h5>')
-                // var timeResults = $('<h6>')
-                // console.log("$(timeResults)", $(timeResults))
-                // $(destinationResults).text(dest + " Train")
-                // $(destinationResults).css("backgroundColor", routeColor)
-                //
-                // if (["RED", "GREEN", "BLUE"].indexOf(routeColor) !== -1) {
-                //     $(destinationResults).css("color", "white");
-                // }
-                //
-                // $(timeResults).text(mins + " minutes");
-                // $(point3).append(div2);
-                // $(div2).append(destinationResults);
-                // $(div2).append(timeResults);
             })
         }
 
 
     };
-// ##################################################
+
 
 })();
 
