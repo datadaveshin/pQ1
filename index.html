@@ -31,57 +31,64 @@
 
 
 <body>
-    <!-- Page Content goes here -->
-    <!-- ##### NAV BAR ####### -->
+    <!-- ###### NAV BAR ####### -->
     <p></p>
+    <nav>
     <div class="container">
         <div class="row">
-            <nav>
                 <div class="nav-wrapper col s12">
-                    <a href="#" class="brand-logo">BartBack</a>
-                    <ul id="nav-mobile" class="right hide-on-med-and-down">
-                        <li><a href="sass.html">Sass</a></li>
-                        <li><a href="badges.html">Components</a></li>
-                        <li><a href="collapsible.html">JavaScript</a></li>
-                    </ul>
+                    <a href="#" class="brand-logo">BARTBack</a>
                 </div>
-            </nav>
         </div>
     </div>
+</nav>
 
 
     <div class="container">
         <main>
             <p></p>
-                <div class="row">
-                    <section id="point1"></section>
-                </div>
+            <div class="row">
+                <section id="point1"></section>
+            </div>
             <p></p>
-            <section id="point2"></section>
+            <div class="row">
+                <section id="point2"></section>
+            </div>
             <p></p>
-            <section id="point3"></section>
+            <div class="row">
+                <section id="point3"></section>
+            </div>
             <p></p>
-            <section id="point4"></section>
+            <div class="row">
+                <section id="point4"></section>
+            </div>
+            <p></p>
         </main>
     </div>
 
 
-    <footer>
+    <footer class="page-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col l4 offset-l2 s12">
+                    <ul>
+                        <li><a class="grey-text text-lighten-3" href="#!">Instructions</a></li>
+                        <li><a class="grey-text text-lighten-3" href="#!">About</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                © 2016 Copyright David Shin
+            </div>
+        </div>
     </footer>
 
-    <!-- ||||||  JavaScript  |||||| -->
-    <!-- vvvvvv     Code     vvvvvv -->
+    <!-- ###### JAVASCRIPT SCRIPTS ####### -->
 
-    <!-- #### Materialize Scripts #### -->
     <!-- # Materialize JS - Activate on bottom for their defaults to overide your CSS above -->
-    <!-- <script type="text/javascript" src="js/materialize.min.js"></script> -->
-
     <!-- # Required by Materialize to render `select` tags -->
-    <script>
-    $(document).ready(function() {
-        $('select').material_select();
-    });
-    </script>
 
     <!-- #### App Scripts ####-->
     <script type="text/javascript" src="js/helperFunctions-1.js"></script>

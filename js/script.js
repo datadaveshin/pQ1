@@ -1,4 +1,11 @@
 "use strict";
+/**
+Needed by Materialize to implement <select> tags
+*/
+$(document).ready(function() {
+    $('select').material_select();
+});
+
 console.log('###$$$$$$@@@********  IN SCRIPT script.js *********@@@$$$$$$$###')
 
 /**
@@ -8,11 +15,11 @@ destArrBack1 is one station back, etc.
 */
 var depVal;
 var arrVal;
+var reqDirection;
 var destArrBack0 = [];
 var destArrBack1 = [];
 var destArrBack2 = [];
 var destArrBack3 = [];
-var reqDirection;
 
 /**
 Initialize returnCondition
