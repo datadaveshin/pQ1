@@ -33,6 +33,7 @@ Bar Station Full Names used by api
 */
 var stationFull = ["12th St. Oakland City Center","16th St. Mission (SF)","19th St. Oakland","24th St. Mission (SF)","Ashby (Berkeley)","Balboa Park (SF)","Bay Fair (San Leandro)","Castro Valley","Civic Center (SF)","Coliseum","Colma","Concord","Daly City","Downtown Berkeley","Dublin/Pleasanton","El Cerrito del Norte","El Cerrito Plaza","Embarcadero (SF)","Fremont","Fruitvale (Oakland)","Glen Park (SF)","Hayward","Lafayette","Lake Merritt (Oakland)","MacArthur (Oaklanßd)","Millbrae","Montgomery St. (SF)","North Berkeley","North Concord/Martinez","Oakland Int'l Airport","Orinda","Pittsburg/Bay Point","Pleasant Hill","Powell St. (SF)","Richmond","Rockridge (Oakland)","San Bruno","San Francisco Int'l Airport","San Leandro","South Hayward","South San Francisco","Union City","Warm Springs/South Fremont","Walnut Creek","West Dublin","West Oakland"]
 
+// Define Routes
 var route8 = ["MLBR", "SBRN", "SSAN", "COLM", "DALY", "BALB", "GLEN", "24TH", "16TH", "CIVC", "POWL", "MONT", "EMBR", "WOAK", "12TH", "19TH", "MCAR", "ASHB", "DBRK", "NBRK", "PLZA", "DELN", "RICH"]
 
 route8 = route8.map(function(item) {return item.toLowerCase();});
@@ -43,7 +44,7 @@ var route2 = ["MLBR", "SFIA", "SBRN", "SSAN", "COLM", "DALY", "BALB", "GLEN", "2
 route2 = route2.map(function(item) {return item.toLowerCase();});
 console.log("route2", route2)
 
-// make clusters a class later
+// Make Clusters
 var clusterRICH = ["ASHB", "DBRK", "NBRK", "PLZA", "DELN", "RICH"]
 
 var clusterSFIA = ["MLBR", "SFIA", "SBRN", "SSAN", "COLM"]
@@ -120,7 +121,7 @@ Setup Buttons
 */
 function addButton(aButtonID, buttonText, attachmentPoint) {
     let newButton = $('<button>')
-    $(newButton).addClass("waves-effect btn col s6")
+    $(newButton).addClass("waves-effect btn col s4")
     $(newButton).attr("id", aButtonID)
     $(newButton).text(buttonText)
 
@@ -131,7 +132,8 @@ function addButton(aButtonID, buttonText, attachmentPoint) {
     console.log("$(sectionPart)", $(sectionPart));
 }
 
-addButton("realTime", "Real Time", "#point1");
+addButton("realTime", "All Trains", "#point1");
+addButton("directTrains", "Direct", "#point1");
 addButton("getSeat", "Get Seat", "#point1");
 // addButton("aButtonID", "buttonText", "attachmentPoint");
 
@@ -177,6 +179,29 @@ Application Loop
         else if (depVal !== "default" && arrVal === "default") {
             returnCondition = 1;
             sendDepRealReq(depVal);
+        }
+        else if (depVal !== "default" && arrVal !== "default") {
+            returnCondition = 1;
+            reqDirection = checkDirection(depVal, arrVal) // Will return array later with all related lines to account for multiple trains
+            console.log("both in the house - reqDirection is", reqDirection);
+            sendDepRealReq(depVal);
+        }
+
+    });
+
+    $('#directTrains').click(function() {
+        let departure = $('#Departure');
+        let arrival = $('#Arrival')
+        depVal = $(departure).val()
+        arrVal = $(arrival).val()
+        console.log("\n\n\n\nDeparture Val~~~~~~~~~~~~~~~~~>", depVal)
+        console.log("Arrival Val~~~~~~~~~~~~~~~~~>", arrVal)
+        if (depVal === "default" && arrVal === "default") {
+            returnCondition = 1;
+        }
+        else if (depVal !== "default" && arrVal === "default") {
+            returnCondition = 1;
+            // sendDepRealReq(depVal);
         }
         else if (depVal !== "default" && arrVal !== "default") {
             returnCondition = 2;
@@ -381,6 +406,7 @@ Application Loop
                 }
 
             });
+
         }
 
         function output3() {
