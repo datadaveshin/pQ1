@@ -2,9 +2,9 @@
 /**
 Needed by Materialize to implement <select> tags
 */
-$(document).ready(function() {
-    $('select').material_select();
-});
+// $(document).ready(function() {
+//     $('select').material_select();
+// });
 
 console.log('###$$$$$$@@@********  IN SCRIPT script.js *********@@@$$$$$$$###')
 
