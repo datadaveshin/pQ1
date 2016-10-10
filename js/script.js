@@ -2,9 +2,9 @@
 /**
 Needed by Materialize to implement <select> tags
 */
-$(document).ready(function() {
-    $('select').material_select();
-});
+// $(document).ready(function() {
+//     $('select').material_select();
+// });
 
 console.log('###$$$$$$@@@********  IN SCRIPT script.js *********@@@$$$$$$$###')
 
@@ -109,6 +109,10 @@ function genSelector(selectorName, attachmentPoint) {
     $(selectorDefaultOption).text(selectorName + " Station")
 
     // Build Dom
+    // $(point1).append(selectorDiv)
+    // $(selectorDiv).append(selectorHeading)
+    // $(selectorDiv).append(selectorSelect)
+    // $(selectorSelect).append(selectorDefaultOption)
     $(point1).append(selectorDiv)
     $(selectorDiv).append(selectorHeading)
     $(selectorDiv).append(selectorSelect)
