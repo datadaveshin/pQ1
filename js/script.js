@@ -202,6 +202,10 @@ Application Loop
     var ua = navigator.userAgent,
     pickclick = (ua.match(/iPad/i) || ua.match(/iPhone/)) ? "touchstart" : "click";
     // $('#realTime').on(pickclick, function(e) {
+
+        p = $('p')
+        $(p).text("Something is working")
+
     // do something here
         let departure = $('#Departure');
         let arrival = $('#Arrival')
