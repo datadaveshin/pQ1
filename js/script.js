@@ -143,7 +143,7 @@ function addButton(aButtonID, buttonText, attachmentPoint) {
     console.log("$(sectionPart)", $(sectionPart));
 }
 
-addButton("realTime", "All Trains", "#point1");
+// addButton("realTime", "All Trains", "#point1");
 addButton("directTrains", "Direct", "#point1");
 addButton("getSeat", "Get Seat", "#point1");
 // addButton("aButtonID", "buttonText", "attachmentPoint");
