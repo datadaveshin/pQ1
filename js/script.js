@@ -101,7 +101,7 @@ function genSelector(selectorName, attachmentPoint) {
     // Set attributes, names, values
     $(selectorDiv).attr("id", selectorName + "selector")
     $(selectorDiv).attr("id", selectorName + "selector")
-    $(selectorDiv).addClass("container")
+    $(selectorDiv).addClass("browser-default")
     $(selectorSelect).attr("name", selectorName)
     $(selectorSelect).attr("id", selectorName)
     // $(selectorSelect).addClass("browser-default")
