@@ -201,7 +201,7 @@ Application Loop
     // });
     var ua = navigator.userAgent,
     pickclick = (ua.match(/iPad/i) || ua.match(/iPhone/)) ? "touchstart" : "click";
-    $('#realTime').on(pickclick, function(e) {
+    // $('#realTime').on(pickclick, function(e) {
     // do something here
         let departure = $('#Departure');
         let arrival = $('#Arrival')
@@ -222,7 +222,7 @@ Application Loop
             console.log("both in the house - reqDirection is", reqDirection);
             sendDepRealReq(depVal);
         }
-    });
+    // });
 
     $('#directTrains').click(function() {
         let departure = $('#Departure');
