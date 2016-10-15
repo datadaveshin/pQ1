@@ -1,0 +1,16 @@
+{
+  "name": "pQ1",
+  "version": "1.0.0",
+  "description": "Bart App",
+  "main": "app.js",
+  "repository": {
+    "url": "git@github.com:datadaveshin/pQ1.git",
+    "type": "git"
+  },
+  "author": "David Shin <datadaveshin@gmail.com>",
+  "license": "All Rights Reserved, Copyright David Shin 2016",
+  "dependencies": {
+    "ejs": "^2.5.2",
+    "express": "^4.14.0"
+  }
+}
