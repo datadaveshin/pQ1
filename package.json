@@ -7,7 +7,9 @@
     "url": "git@github.com:datadaveshin/pQ1.git",
     "type": "git"
   },
-  "scripts": { "start": "node app.js"},
+  "scripts":
+
+   { "start": "node app.js"},
   "author": "David Shin <datadaveshin@gmail.com>",
   "license": "All Rights Reserved, Copyright David Shin 2016",
   "dependencies": {
